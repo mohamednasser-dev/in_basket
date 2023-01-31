@@ -274,7 +274,7 @@
             "actived" => "مفعل",
             "blocked" => "محظور",
             "all_rights_reserved" => "جميع الحقوق محفوظة",
-            "usmart" => "Tes",
+            "tes" => "Tes",
             "copyright" => "حقوق النشر",
             "update_profile" => "تعديل الملف الشخصي",
             "myprofile" => "حسابي",

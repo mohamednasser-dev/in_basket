@@ -1,7 +1,7 @@
 <?php
     return [
 
-        
+
 
         'feature_hoursfeature_hours' => "Number of hours of the property",
         'feature_type' => "Property type",
@@ -224,7 +224,7 @@
         "actived" => "Actived",
         "blocked" => "Blocked",
         "all_rights_reserved" => "All Rights Reserved",
-        "usmart" => "U SMART",
+        "tes" => "TES",
         "copyright" => "Copyright",
         "update_profile" => "Update Profile",
         "myprofile" => "My Profile",

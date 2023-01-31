@@ -1,10 +1,11 @@
 </div>
 </div>
 </div>
+</div>
 <div class="footer-wrapper">
     <div class="footer-section f-section-1">
         <p class="">{{ __('messages.copyright') }} © 2020
-            <a target="_blank" class="website-link" href="https://u-smart.co/">{{ __('messages.usmart') }}</a>
+            <a target="_blank" class="website-link" href="https://tesolutionspro.com/">{{ __('messages.tes') }}</a>
             , {{ __('messages.all_rights_reserved') }}
         </p>
     </div>
@@ -15,9 +16,9 @@
 <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
 
 <script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous">
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
 </script>
 
 <!-- <script src="/admin/assets/js/libs/jquery-3.1.1.min.js"></script> -->
@@ -49,8 +50,8 @@
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 
 <script src="/admin/assets/js/scrollspyNav.js"></script>
-    <script src="/admin/plugins/select2/select2.min.js"></script>
-    <script src="/admin/plugins/select2/custom-select2.js"></script>
+<script src="/admin/plugins/select2/select2.min.js"></script>
+<script src="/admin/plugins/select2/custom-select2.js"></script>
 
 {{--to generat toaster--}}
 <script src="/admin/plugins/toast-master/js/jquery.toast.js"></script>
