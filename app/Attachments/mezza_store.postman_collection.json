@@ -1,0 +1,629 @@
+{
+	"info": {
+		"_postman_id": "6ec377a4-b622-4372-9539-45ef7da40e04",
+		"name": "mezza_store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9500599"
+	},
+	"item": [
+		{
+			"name": "ads",
+			"item": [
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "search ads",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9jYXJzLWFkcy5oZXJva3VhcHAuY29tXC9hcGlcL2F1dGhcL2xvZ2luXC9lblwvdjEiLCJpYXQiOjE2MTIwMjQ1NzksImV4cCI6MzYxNjEyMDI0NTc5LCJuYmYiOjE2MTIwMjQ1NzksImp0aSI6IlMxUVBZZHFYRHZIMVFFRHgiLCJzdWIiOjEwMywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.VP5Bk_p8FNFVaS42DyZho6MZzS9ZfHnhe5WTgAATcDM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "search",
+											"value": "new",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localHost}}ads/search/ar/v1",
+									"host": [
+										"{{localHost}}ads"
+									],
+									"path": [
+										"search",
+										"ar",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Range price search",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9jYXJzLWFkcy5oZXJva3VhcHAuY29tXC9hcGlcL2F1dGhcL2xvZ2luXC9lblwvdjEiLCJpYXQiOjE2MTIwMjQ1NzksImV4cCI6MzYxNjEyMDI0NTc5LCJuYmYiOjE2MTIwMjQ1NzksImp0aSI6IlMxUVBZZHFYRHZIMVFFRHgiLCJzdWIiOjEwMywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.VP5Bk_p8FNFVaS42DyZho6MZzS9ZfHnhe5WTgAATcDM",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "from_price",
+											"value": "1000",
+											"type": "text"
+										},
+										{
+											"key": "to_price",
+											"value": "2000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{localHost}}ads/range_price_search/ar/v1",
+									"host": [
+										"{{localHost}}ads"
+									],
+									"path": [
+										"range_price_search",
+										"ar",
+										"v1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "select all ads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9jYXJzLWFkcy5oZXJva3VhcHAuY29tXC9hcGlcL2F1dGhcL2xvZ2luXC9lblwvdjEiLCJpYXQiOjE2MTE5NTU4NTEsImV4cCI6MzYxNjExOTU1ODUxLCJuYmYiOjE2MTE5NTU4NTEsImp0aSI6Ikt6TlBTcjFFNVRINHhtS0wiLCJzdWIiOjEwMywicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.kHU4G70C8Dy3cDY8jvrg65tDXLbv8hktJ8Z0kFzPfvA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localHost}}ad/select_all_ads/ar/v1",
+							"host": [
+								"{{localHost}}ad"
+							],
+							"path": [
+								"select_all_ads",
+								"ar",
+								"v1"
+							]
+						},
+						"description": "هنا فالريكوست ده لو بعت ar هيظهر العربي فال title ولو بعت en هيظهر الانجليزى برضو فال\n title يعنى تستخدم title دائما فى العرض\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "get ad details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localHost}}products/details/6/ar/v1",
+							"host": [
+								"{{localHost}}products"
+							],
+							"path": [
+								"details",
+								"6",
+								"ar",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"mohamed nasser2\",\n    \"phone\" : \"01111651455\",\n    \"email\" : \"nasser2@gmail.com\",\n    \"password\" : \"123456\",\n    \"fcm_token\" : \"11111\",\n    \"type\" : 1,\n    \"unique_id\" : \"2222222\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localHost}}auth/register/en/v1",
+							"host": [
+								"{{localHost}}auth"
+							],
+							"path": [
+								"register",
+								"en",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\" : \"01201636129\",\n\t\"password\" : \"12345678\",\n\t\"fcm_token\" : \"test\",\n    \"type\" : 2,\n    \"unique_id\" : \"unique_id\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localHost}}auth/login/en/v1",
+							"host": [
+								"{{localHost}}auth"
+							],
+							"path": [
+								"login",
+								"en",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create visitor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "unique_id",
+									"value": "2222222",
+									"type": "text"
+								},
+								{
+									"key": "fcm_token",
+									"value": "11111",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localHost}}visitor/create/en/v1",
+							"host": [
+								"{{localHost}}visitor"
+							],
+							"path": [
+								"create",
+								"en",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9hdXRoXC9sb2dpblwvZW5cL3YxIiwiaWF0IjoxNjExNjYxNTkwLCJleHAiOjM2MTYxMTY2MTU5MCwibmJmIjoxNjExNjYxNTkwLCJqdGkiOiJERnJPYktZNGtsSDBHdURKIiwic3ViIjoxMDMsInBydiI6Ijg3ZTBhZjFlZjlmZDE1ODEyZmRlYzk3MTUzYTE0ZTBiMDQ3NTQ2YWEifQ.sIJf8N5aYLM1eem_xj5Yra6fOo7bFg5ha-tyoqWcBI0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{localHost}}my_account/ar/v1",
+							"host": [
+								"{{localHost}}my_account"
+							],
+							"path": [
+								"ar",
+								"v1"
+							]
+						},
+						"description": "phone\nmessage"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "app_settings",
+			"item": [
+				{
+					"name": "terms",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRK"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\" : \"012254666\",\n    \"message\" : \"ksksdlssklsjdlshklss\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localHost}}terms/en/v1",
+							"host": [
+								"{{localHost}}terms"
+							],
+							"path": [
+								"en",
+								"v1"
+							]
+						},
+						"description": "phone\nmessage"
+					},
+					"response": []
+				},
+				{
+					"name": "about_app",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRK"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\" : \"012254666\",\n    \"message\" : \"ksksdlssklsjdlshklss\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localHost}}about_app/ar/v1",
+							"host": [
+								"{{localHost}}about_app"
+							],
+							"path": [
+								"ar",
+								"v1"
+							]
+						},
+						"description": "phone\nmessage"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "main_page",
+			"item": [
+				{
+					"name": "Get Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{localHost}}categories/ar/v1",
+							"host": [
+								"{{localHost}}categories"
+							],
+							"path": [
+								"ar",
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sub Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz"
+							}
+						],
+						"url": {
+							"raw": "{{localHost}}sub_categories/level1/7/ar/v1",
+							"host": [
+								"{{localHost}}sub_categories"
+							],
+							"path": [
+								"level1",
+								"7",
+								"ar",
+								"v1"
+							]
+						},
+						"description": "category_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get products (last level)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{localHost}}products/last-level/7/ar/v1",
+							"host": [
+								"{{localHost}}products"
+							],
+							"path": [
+								"last-level",
+								"7",
+								"ar",
+								"v1"
+							]
+						},
+						"description": "(param) => sub_category_id_level_4_id\n(query) => category_id\n(query) => sub_category_level1_id\n(query) => sub_category_level2_id\n(query) => sub_category_level3_id\n\n- لو sub_category_id_level_4_id = 0 => جميع الإعلانات الخاصة بالقسم الفرعى 3\n- pin = 1 => إعلان مثبت\n- لو price فاضى => اسأل البائع"
+					},
+					"response": []
+				},
+				{
+					"name": "Sorting",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{localHost}}products/sort-last-level/5/ar/v1?type=4",
+							"host": [
+								"{{localHost}}products"
+							],
+							"path": [
+								"sort-last-level",
+								"5",
+								"ar",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "4"
+								}
+							]
+						},
+						"description": "(param) => sub_category_id_level_4_id\n(query) => category_id\n(query) => sub_category_level1_id\n(query) => sub_category_level2_id\n(query) => sub_category_level3_id\n\n- لو sub_category_id_level_4_id = 0 => جميع الإعلانات الخاصة بالقسم الفرعى 3\n- pin = 1 => إعلان مثبت\n- لو price فاضى => اسأل البائع"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaints Box",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "mo nasser",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "013255555",
+							"type": "text"
+						},
+						{
+							"key": "describtion",
+							"value": "hi there i want ..........",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localHost}}contactus/en/v1",
+					"host": [
+						"{{localHost}}contactus"
+					],
+					"path": [
+						"en",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "make_order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "$2y$12$ZtgKLOyfvyXH33JE67Ei0.qupt771t62d21M4/OJumBmsZ1bexxpCPiuhfdRKz",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "mo nasser",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "013255555",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "hi there i want ..........",
+							"type": "text"
+						},
+						{
+							"key": "notes",
+							"value": "notes notes",
+							"type": "text"
+						},
+						{
+							"key": "data[0][id]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "data[0][quantity]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "data[0][price]",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "data[1][id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "data[1][quantity]",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "data[1][price]",
+							"value": "400",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localHost}}make_order/en/v1",
+					"host": [
+						"{{localHost}}make_order"
+					],
+					"path": [
+						"en",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
