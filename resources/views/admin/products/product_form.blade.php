@@ -46,9 +46,14 @@
                         </select>
                     </div>
                     <div class="form-group mb-4">
-                        <label for="title">{{ __('messages.product_name') }}</label>
-                        <input required type="text" name="title" class="form-control" id="title"
-                               placeholder="{{ __('messages.product_name') }}" value="">
+                        <label for="title_ar">{{ __('messages.product_name_ar') }}</label>
+                        <input required type="text" name="title_ar" class="form-control" id="title_ar"
+                               placeholder="{{ __('messages.product_name_ar') }}" value="">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="title_en">{{ __('messages.product_name_en') }}</label>
+                        <input required type="text" name="title_en" class="form-control" id="title_en"
+                               placeholder="{{ __('messages.product_name_en') }}" value="">
                     </div>
                     <div class="form-group mb-4">
                         <label for="price">{{ __('messages.product_price') }}</label>
@@ -56,47 +61,30 @@
                                placeholder="{{ __('messages.product_price') }}" value="">
                     </div>
                     <div class="form-group mb-4 arabic-direction">
-                        <label for="description">{{ __('messages.product_description') }}</label>
-                        <textarea required name="description" placeholder="{{ __('messages.product_description') }}"
-                                  class="form-control" id="description" rows="5"></textarea>
+                        <label for="description_ar">{{ __('messages.product_description_ar') }}</label>
+                        <textarea  name="description_ar"
+                                  placeholder="{{ __('messages.product_description_ar') }}"
+                                  class="form-control" id="description_ar" rows="5"></textarea>
                     </div>
-                    <h4>{{ __('messages.brand') }}</h4>
-                    <div class="form-group" id="city_cont">
-                        @php $brands = \App\Marka::where('deleted','0')->get(); @endphp
-                        <select required class="form-control" name="brand_id" id="cmb_city_id">
-                            <option selected>{{ __('messages.choose_brand') }}</option>
-                            @foreach ($brands as $row)
-                                @if( app()->getLocale() == 'en')
-                                    <option value="{{ $row->id }}">{{ $row->title_en }}</option>
-                                @else
-                                    <option value="{{ $row->id }}">{{ $row->title_ar }}</option>
-                                @endif
-                            @endforeach
-                        </select>
+                    <div class="form-group mb-4 arabic-direction">
+                        <label for="description_en">{{ __('messages.product_description_en') }}</label>
+                        <textarea name="description_en"
+                                  placeholder="{{ __('messages.product_description_en') }}"
+                                  class="form-control" id="description_en" rows="5"></textarea>
                     </div>
-                    <h4>{{ __('messages.color') }}</h4>
-                    <div class="form-group" id="area_cont">
-                        @php $colors = \App\Color::where('deleted','0')->get(); @endphp
-                        <select required class="form-control tagging" name="color_id">
-                            @foreach ($colors as $row)
-                                <option value='{{$row->id}}'>
-                                    @if(app()->getLocale() == 'ar')
-                                        {{$row->title_ar}}
-                                    @else
-                                        {{$row->title_en}}
-                                    @endif
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+
+
                     <div class="form-group mb-4 mt-3">
                         <label for="exampleFormControlFile1">{{ __('messages.main_image') }}</label>
 
                         <div class="custom-file-container" data-upload-id="mySecondImage">
-                            <label>{{ __('messages.upload') }} ({{ __('messages.single_image') }}) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
-                            <label class="custom-file-container__custom-file" >
-                                <input type="file" required name="main_image" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <label>{{ __('messages.upload') }} ({{ __('messages.single_image') }}) <a
+                                    href="javascript:void(0)" class="custom-file-container__image-clear"
+                                    title="Clear Image">x</a></label>
+                            <label class="custom-file-container__custom-file">
+                                <input type="file" required name="main_image"
+                                       class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
                                 <span class="custom-file-container__custom-file__custom-file-control"></span>
                             </label>
                             <div class="custom-file-container__image-preview">
@@ -121,12 +109,12 @@
                 </form>
             </div>
 
-@endsection
-@section('scripts')
-   <script src="/admin/assets/js/generate_categories.js"></script>
-   <script>
-        $(".tagging").select2({
-            tags: true
-        });
-    </script>
+            @endsection
+            @section('scripts')
+                <script src="/admin/assets/js/generate_categories.js"></script>
+                <script>
+                    $(".tagging").select2({
+                        tags: true
+                    });
+                </script>
 @endsection

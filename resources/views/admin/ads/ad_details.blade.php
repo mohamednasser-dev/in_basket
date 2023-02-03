@@ -4,24 +4,24 @@
 
 @section('content')
         <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
-			
+
         <div class="statbox widget box box-shadow">
             <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4>{{ __('messages.ad_details') }}</h4>
-					
+
                 </div>
             </div>
         </div>
         <div class="widget-content widget-content-area">
-            <div class="table-responsive"> 
+            <div class="table-responsive">
                 <table class="table table-bordered mb-4">
                     <tbody>
                             <tr>
                                 <td class="label-table" > {{ __('messages.image') }}</td>
                                 <td>
-                                    <img style="height: 100px;" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{ $data['ad']['image'] }}"  />
+                                    <img style="height: 100px;" src="{{ $data['ad']['image'] }}"  />
                                 </td>
                             </tr>
                             <tr>
@@ -38,7 +38,7 @@
                                         {{ $data['ad']['content'] }}
                                     </a>
                                 </td>
-                            </tr>    
+                            </tr>
                             @else
                             <tr>
                                 <td class="label-table" > {{ __('messages.user') }} </td>
@@ -47,7 +47,7 @@
                                         {{ $data['product']['user']['name'] }}
                                     </a>
                                 </td>
-                            </tr> 
+                            </tr>
                             <tr>
                                 <td class="label-table" > {{ __('messages.product') }} </td>
                                 <td>
@@ -55,12 +55,12 @@
                                         {{ $data['product']['title'] }}
                                     </a>
                                 </td>
-                            </tr> 
+                            </tr>
                             @endif
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>  
-    
+    </div>
+
 @endsection

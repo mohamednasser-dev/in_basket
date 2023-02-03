@@ -32,7 +32,7 @@ class UserController extends AdminController{
     // edit user details
     public function edit(Request $request){
         $data['user'] = User::find($request->id);
-        return view('admin.user_edit' , ['data' => $data]);
+        return view('admin.users.user_edit' , ['data' => $data]);
     }
 
     // edit user Post Method
@@ -51,8 +51,6 @@ class UserController extends AdminController{
         $current_user->name = $request->name;
         $current_user->phone = $request->phone;
         $current_user->email = $request->email;
-		$current_user->free_ads_count = $request->free_ads_count;
-		$current_user->paid_ads_count = $request->paid_ads_count;
         if($request->password){
             $current_user->password = Hash::make($request->password);
         }
@@ -76,16 +74,11 @@ class UserController extends AdminController{
         if($check_user_mail){
             return redirect('admin-panel/users/add')->with('status', 'Email Exists Before');
         }
-
-        $setting = Setting::find(1);
-        $free_ads = $setting['free_ads_count'];
-
         $user = new User();
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->free_ads_count = $free_ads;
         $user->save();
         return redirect('admin-panel/users/show');
     }

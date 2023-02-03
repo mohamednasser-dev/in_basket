@@ -19,8 +19,6 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
         'active',
         'seen',
-        'free_ads_count',
-        'paid_ads_count',
         'my_wallet',
         'free_balance',
         'payed_balance',

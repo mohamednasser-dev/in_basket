@@ -22,7 +22,7 @@ class BrandController extends AdminController
         return redirect( route('brands.index'));
     }
     public function edit($id) {
-        $data = Marka::findOrFail($id)->first();
+        $data = Marka::findOrFail($id);
         return view('admin.brands.edit', compact('data'));
     }
     public function update(Request $request, $id) {

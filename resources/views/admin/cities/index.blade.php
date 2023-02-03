@@ -24,39 +24,31 @@
                         <tr>
                             <th class="text-center">Id</th>
                             <th class="text-center">{{ __('messages.name') }}</th>
-                            <th class="text-center">{{ __('messages.areas') }}</th>
+                            <th class="text-center">{{ __('messages.shipping_cost') }}</th>
                             @if(Auth::user()->update_data)
                                 <th class="text-center">{{ __('messages.edit') }}</th>
                             @endif
                             @if(Auth::user()->delete_data)
-                                <th class="text-center" >{{ __('messages.delete') }}</th>
+                                <th class="text-center">{{ __('messages.delete') }}</th>
                             @endif
                         </tr>
                         </thead>
                         <tbody>
                         <?php $i = 1; ?>
                         @foreach ($data as $row)
-                            <tr >
+                            <tr>
                                 <td class="text-center"><?=$i;?></td>
-                                <td class="text-center blue-color">{{ app()->getLocale() == 'en' ? $row->title_en : $row->title_ar }}</td>
-                                <td class="text-center blue-color">
-                                    <a href="{{route('cities.show',$row->id)}}">
-                                        <div class="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                 stroke-linejoin="round" class="feather feather-layers">
-                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                                                <polyline points="2 17 12 22 22 17"></polyline>
-                                                <polyline points="2 12 12 17 22 12"></polyline>
-                                            </svg>
-                                        </div>
-                                    </a>
-                                </td>
+                                <td class="text-center blue-color">{{ $row->title }}</td>
+                                <td class="text-center blue-color">{{ $row->shipping_cost }}</td>
                                 @if(Auth::user()->update_data)
-                                    <td class="text-center blue-color" ><a href="{{ route('cities.edit', $row->id) }}" ><i class="far fa-edit"></i></a></td>
+                                    <td class="text-center blue-color"><a href="{{ route('cities.edit', $row->id) }}"><i
+                                                class="far fa-edit"></i></a></td>
                                 @endif
                                 @if(Auth::user()->delete_data)
-                                    <td class="text-center blue-color" ><a onclick="return confirm('{{ __('messages.are_you_sure') }}');" href="{{ route('delete.cities', $row->id) }}" ><i class="far fa-trash-alt"></i></a></td>
+                                    <td class="text-center blue-color"><a
+                                            onclick="return confirm('{{ __('messages.are_you_sure') }}');"
+                                            href="{{ route('delete.cities', $row->id) }}"><i
+                                                class="far fa-trash-alt"></i></a></td>
                                 @endif
                                 <?php $i++; ?>
                             </tr>

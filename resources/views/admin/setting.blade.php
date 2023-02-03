@@ -27,7 +27,7 @@
                             <div id="defaultAccordionOne" class="collapse" aria-labelledby="..." data-parent="#toggleAccordion">
                                 <div class="card-body">
                                     <div class="form-group mb-4">
-                                        <image style="height: 100px;" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{$data['setting']['logo']}}">
+                                        <image style="height: 100px;" src="{{$data['setting']['logo']}}">
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="logo">{{ __('messages.logo') }}</label>

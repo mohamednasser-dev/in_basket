@@ -125,7 +125,7 @@
                             @foreach ($data->OrderDetails as $row)
                                 <tr >
                                     <td class="text-center blue-color"><?=$i;?></td>
-                                    <td class="text-center"><img style="height: 50px;" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{ $row->Product->main_image }}"  /></td>
+                                    <td class="text-center"><img style="height: 50px;" src="{{ $row->Product->main_image }}"  /></td>
                                     <td class="text-center blue-color">{{ $row->Product->title }}</td>
                                     <td class="text-center blue-color">{{ $row->quantity }}</td>
                                     <td class="text-center blue-color">{{ $row->price }}</td>

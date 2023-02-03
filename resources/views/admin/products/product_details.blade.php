@@ -39,6 +39,12 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="label-table" ><h6> {{ __('messages.sub_category_first') }} </h6></td>
+                            <td>
+                                {{ $data->sub_category->title_ar }}
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="label-table" ><h6> {{ __('messages.product_description') }}</h6> </td>
                             <td>
                                 {{ $data->description }}
@@ -50,41 +56,19 @@
                                 {{ $data->price }} {{ __('messages.dinar') }}
                             </td>
                         </tr>
-                        <tr>
-                            <td class="label-table" ><h6> {{ __('messages.brand') }}</h6></td>
-                            <td>
-                                @if(app()->getLocale() == 'ar')
-                                    {{ $data->Brand_web->title_ar }}
-                                @else
-                                    {{ $data->Brand_web->title_en }}
-                                @endif
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-table" ><h6> {{ __('messages.color') }}</h6></td>
-                            <td>
-                                (
-                                    @if(app()->getLocale() == 'ar')
-                                        {{ $data->Color->title_ar }}
-                                    @else
-                                    {{ $data->Color->title_en }}
-                                    @endif
-                                )
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 <h4>{{ __('messages.main_image') }}</h4><br>
                 <div class="row">
                     <div class="col-md-2 product_image">
-                        <img style="width: 100px" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{ $data->main_image }}"  />
+                        <img class="img-thumbnail" style="width: 150px; height: 150px;" src="{{ $data->image }}"  />
                     </div>
                 </div>
                 <h4 style="margin-top: 20px" >{{ __('messages.product_images') }}</h4><br>
                 <div class="row">
                     @foreach ($data->images as $image)
                         <div style="position : relative" class="col-md-2 product_image">
-                            <img style="height: 70px;" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{ $image->image }}"  />
+                            <img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $image->product_image }}"  />
                         </div>
                     @endforeach
                 </div>

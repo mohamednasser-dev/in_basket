@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                 <h4>{{ __('messages.user_edit') }}</h4>
-				
+
             </div>
     </div>
 
@@ -17,7 +17,7 @@
         <div class="alert alert-danger mb-4" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">x</button>
             <strong>Error!</strong> {{ session('status') }} </button>
-        </div> 
+        </div>
     @endif
 
 <form method="post" action="" >
@@ -37,14 +37,6 @@
         <div class="form-group mb-4">
         <label for="password">{{ __('messages.password') }}</label>
         <input  type="password" class="form-control" id="password" name="password" placeholder="{{ __('messages.password') }}" value="" >
-    </div>  
-		    <div class="form-group mb-4">
-        <label for="free_ads_count">{{ __('messages.free_ads_count') }}</label>
-        <input required type="number" class="form-control" id="free_ads_count" name="free_ads_count" placeholder="{{ __('messages.free_ads_count') }}" value="{{$data['user']['free_ads_count']}}" >
-    </div>  
-	    <div class="form-group mb-4">
-        <label for="paid_ads_count">{{ __('messages.paid_ads_count') }}</label>
-        <input required type="number" class="form-control" id="paid_ads_count" name="paid_ads_count" placeholder="{{ __('messages.paid_ads_count') }}" value="{{$data['user']['paid_ads_count']}}" >
     </div>
     <input type="submit"  value="{{ __('messages.submit') }}" class="btn btn-primary">
 </form>

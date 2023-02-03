@@ -36,7 +36,9 @@
                         @foreach ($data['ads'] as $ad)
                             <tr>
                                 <td><?=$i;?></td>
-                                <td class="text-center"><img style="height: 100px;" src="https://res.cloudinary.com/dwevccen7/image/upload/v1614430614/{{ $ad->image }}"  /></td>
+                                <td class="text-center">
+                                    <img class="img-thumbnail" style="height: 50px;" src="{{ $ad->image }}" alt="ad_image"  />
+                                </td>
                                 @if(Auth::user()->delete_data)
                                     <td class="text-center blue-color" ><a onclick="return confirm('Are you sure you want to delete this item?');" href="/admin-panel/ads/delete/{{ $ad->id }}" ><i class="far fa-trash-alt"></i></a></td>
                                 @endif
