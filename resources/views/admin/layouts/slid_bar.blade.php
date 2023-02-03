@@ -155,6 +155,7 @@
                         </a>
                     </li>
                 @endif
+                @if(in_array(18 , Auth::user()->custom['admin_permission']))
                 <li class="menu coupons">
                     <a href="{{route('coupons.index')}}" class="dropdown-toggle first-link">
                         <div class="">
@@ -168,7 +169,7 @@
                         </div>
                     </a>
                 </li>
-
+                @endif
 
             <!-- @if(in_array(16 , Auth::user()->custom['admin_permission']))
                 <li class="menu balance_packages">

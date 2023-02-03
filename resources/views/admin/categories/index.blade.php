@@ -38,7 +38,7 @@
                         @foreach ($data['categories'] as $category)
                             <tr>
                                 <td><?=$i;?></td>
-                                <td class="text-center"><img style="height: 100px;" src="{{ $category->image }}"/></td>
+                                <td class="text-center"><img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $category->image }}"/></td>
                                 <td class="text-center">{{ app()->getLocale() == 'en' ? $category->title_en : $category->title_ar }}</td>
                                 <td class="text-center blue-color">
                                     <a href="{{route('sub_cat.show',$category->id)}}">

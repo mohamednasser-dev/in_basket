@@ -24,7 +24,6 @@
                 <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th class="text-center">{{ __('messages.image') }}</th>
                             @if(Auth::user()->delete_data)
                                 <th class="text-center" >{{ __('messages.delete') }}</th>
@@ -35,9 +34,8 @@
                         <?php $i = 1; ?>
                         @foreach ($data['ads'] as $ad)
                             <tr>
-                                <td><?=$i;?></td>
                                 <td class="text-center">
-                                    <img class="img-thumbnail" style="height: 50px;" src="{{ $ad->image }}" alt="ad_image"  />
+                                    <img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $ad->image }}" />
                                 </td>
                                 @if(Auth::user()->delete_data)
                                     <td class="text-center blue-color" ><a onclick="return confirm('Are you sure you want to delete this item?');" href="/admin-panel/ads/delete/{{ $ad->id }}" ><i class="far fa-trash-alt"></i></a></td>

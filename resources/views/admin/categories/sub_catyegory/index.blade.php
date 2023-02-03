@@ -34,7 +34,7 @@
                         @foreach ($data as $row)
                             <tr >
                                 <td class="text-center"><?=$i;?></td>
-                                <td class="text-center"><img style="height: 100px;" src="{{ $row->image }}"  /></td>
+                                <td class="text-center"><img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $row->image }}"  /></td>
                                 <td class="text-center blue-color">{{ app()->getLocale() == 'en' ? $row->title_en : $row->title_ar }}</td>
                                 @if(Auth::user()->update_data)
                                     <td class="text-center blue-color" ><a href="{{ route( 'sub_cat.edit', $row->id ) }}" ><i class="far fa-edit"></i></a></td>
