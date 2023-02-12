@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+
 // use Illuminate\Support\Facades\Auth;
 
 
@@ -26,8 +28,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // get permissions of current admin
+        $languages = ['ar', 'en'];
 
-        // View::share('user', $data);
+        date_default_timezone_set('Africa/Cairo');
+
+        $lang = request()->header('lang');
+
+        if ($lang) {
+
+            if (in_array($lang, $languages)) {
+                App::setLocale($lang);
+
+            } else {
+
+                App::setLocale('ar');
+            }
+        }
+
     }
 }

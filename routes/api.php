@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
+    Route::post('register', 'AuthController@sign_up');
+    Route::post('login', 'AuthController@login');
+    Route::post('forget-password', 'AuthController@forget_password');
+    Route::post('verify-code', 'AuthController@verify_code');
+    Route::post('change-password', 'AuthController@change_password');
+    Route::post('social-login', 'AuthController@socialLogin');
+
 });
