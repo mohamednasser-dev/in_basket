@@ -26,8 +26,7 @@
                             <th class="center">{{trans('messages.coupon_code')}}</th>
                             <th class="center">{{trans('messages.from_date')}}</th>
                             <th class="center">{{trans('messages.to_date')}}</th>
-                            <th class="center">{{trans('messages.discount')}}</th>
-                            <th class="center">{{trans('messages.usage_count')}}</th>
+                            <th class="center">{{trans('messages.discount')}} (%)</th>
                             <th class="center">{{trans('messages.current_used_count')}}</th>
                             @if(Auth::user()->update_data)
                                 <th class="text-center">{{ __('messages.edit') }}</th>
@@ -46,7 +45,6 @@
                                 <td class="center">{{ $row->from_date}}</td>
                                 <td class="center">{{ $row->to_date}}</td>
                                 <td class="center">{{ $row->amount}} </td>
-                                <td class="center">{{ $row->usage_count}}</td>
                                 <td class="center">{{ $row->current_used}}</td>
                                 @if(Auth::user()->update_data)
                                     <td class="text-center blue-color"><a href="{{ route('coupons.edit', $row->id) }}"><i

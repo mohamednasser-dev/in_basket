@@ -42,7 +42,6 @@ class CouponsController extends AdminController
                 'from_date' => 'required|date|after_or_equal:' . Carbon::now()->format('Y-m-d'),
                 'to_date' => 'required|date|after_or_equal:from_date',
                 'amount' => 'required|numeric|min:0',
-                'usage_count' => 'required|numeric|min:0',
             ]);
         Coupon::create($data);
         session()->flash('success', trans('messages.added_s'));
@@ -82,7 +81,6 @@ class CouponsController extends AdminController
                 'from_date' => 'required|date|after_or_equal:' . Carbon::now()->format('Y-m-d'),
                 'to_date' => 'required|date|after_or_equal:from_date',
                 'amount' => 'required|numeric|min:0',
-                'usage_count' => 'required|numeric|min:0',
             ]);
         Coupon::findOrFail($id)->update($data);
         session()->flash('success', trans('messages.updated_s'));

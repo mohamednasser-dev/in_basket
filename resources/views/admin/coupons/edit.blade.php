@@ -43,14 +43,6 @@
                            step="any"
                     />
                 </div>
-                <div class="form-group  col-6">
-                    <label>عدد استخدامات كوبون الخصم <span
-                            class="text-danger">*</span></label>
-                    <input required name="usage_count" min="0" max="999999999"
-                           value="{{ old('usage_count', $data->usage_count ?? '') }}"
-                           class="form-control  {{ $errors->has('usage_count') ? 'border-danger' : '' }}" type="number"
-                    />
-                </div>
                 <input type="submit" value="{{ __('messages.edit') }}" class="btn btn-primary">
             </form>
         </div>
