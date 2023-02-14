@@ -181,7 +181,7 @@ class AuthController extends Controller
             $userFound->save();
 
             $data = (new UserResource($userFound));
-            return response()->json(msgdata($request,success(), trans('lang.success'), $data));
+            return response()->json(msgdata($request, success(), trans('lang.success'), $data));
         }
 
         // 2- if not login with social before
@@ -204,12 +204,12 @@ class AuthController extends Controller
 
         } catch (\Exception $e) {
 
-            return response()->json(msg($request,failed(), trans('lang.EmailExists')));
+            return response()->json(msg($request, failed(), trans('lang.EmailExists')));
         }
 
 
         $data = (new UserResource($user));
-        return response()->json(msgdata($request,success(), trans('lang.success'), $data));
+        return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
 
 
