@@ -19,11 +19,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
+    //auth
     Route::post('register', 'AuthController@sign_up');
     Route::post('login', 'AuthController@login');
     Route::post('forget-password', 'AuthController@forget_password');
     Route::post('verify-code', 'AuthController@verify_code');
     Route::post('change-password', 'AuthController@change_password');
     Route::post('social-login', 'AuthController@socialLogin');
+
+    //Home
+    Route::get('sliders', 'HomeController@sliders');
+    Route::get('home-product', 'HomeController@homeProduct');
+    Route::get('main-categories', 'HomeController@mainCategories');
+    Route::get('category-products/{id}', 'HomeController@ProductsByCategory');
+    Route::get('sub-category/{id}', 'HomeController@subCategory');
+    Route::get('product-details/{id}', 'HomeController@productDetails');
+
+
+    //AuthActionUser
+    Route::Post('add-to-wishlist', 'AuthUserActions@AddToWishlist');
+    Route::Post('remove-from-wishlist', 'AuthUserActions@RemoveFromWishlist');
+    Route::get('wishlist', 'AuthUserActions@wishlist');
 
 });

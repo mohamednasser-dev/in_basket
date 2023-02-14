@@ -4,10 +4,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 
-function six_digit_random_number(){
+function six_digit_random_number()
+{
 //  return  mt_rand(1000, 9999);
     return 1111;
 }
+
 // send fcm notification
 function send_notification($title, $body, $details, $image, $data, $token)
 {
@@ -22,7 +24,7 @@ function send_notification($title, $body, $details, $image, $data, $token)
     );
 
     $fields = array('registration_ids' => $token,
-        'notification' => array('title' => $title, 'body' =>  strip_tags($message), 'details' => $details, 'image' => $image));
+        'notification' => array('title' => $title, 'body' => strip_tags($message), 'details' => $details, 'image' => $image));
 
     $payload = json_encode($fields);
     $curl_session = curl_init();
@@ -87,7 +89,7 @@ function check_api_token($api_token)
 {
     if ($api_token != null && $api_token != "") {
 
-        return \App\Models\User::where("api_token", $api_token)->first();
+        return \App\User::where("jwt", $api_token)->first();
     } else {
         return null;
     }
@@ -128,7 +130,7 @@ function send($tokens, $title = "رسالة جديدة", $msg = "رسالة جد
         ],
         'notification' => [
             'title' => $title,
-            'body' =>  strip_tags($msg),
+            'body' => strip_tags($msg),
             'id' => $chat,
             'type' => $type,
             'icon' => 'myIcon',
@@ -158,7 +160,6 @@ function send($tokens, $title = "رسالة جديدة", $msg = "رسالة جد
     if ($result === FALSE) {
         die('Curl failed: ' . curl_error($ch));
     }
-
 
 
     curl_close($ch);
@@ -211,7 +212,6 @@ function upload_multiple($file, $dir)
     $file->storeAs($destinationPath, $image, 'my_upload');
     return $image;
 }
-
 
 
 if (!function_exists('HttpPost')) {

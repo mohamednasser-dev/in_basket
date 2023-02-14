@@ -14,7 +14,7 @@ class DropColumnFromUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('free_ads_count');
+          //  $table->dropColumn('free_ads_count');
         });
     }
 

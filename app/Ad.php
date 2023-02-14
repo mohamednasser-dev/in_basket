@@ -24,4 +24,11 @@ class Ad extends Model
             $this->attributes['image'] = $img_name;
         }
     }
+
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product', 'content', 'id');
+    }
+
 }

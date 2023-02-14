@@ -50,4 +50,5 @@ return [
     'should_choose_valid_offer' => 'should choose a valid offer',
     'there_is_late_installments' => 'there is late installments',
     'different_currencies' => 'Sorry! Courses have different currencies',
+    'success' => 'Done Successfully',
 ];

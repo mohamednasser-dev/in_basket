@@ -48,4 +48,5 @@ return [
     'inbox_sent' => 'تم ارسال الرسالة بنجاح',
     'there_is_late_installments' => 'يوجد اقسطا متاخرة يجب دفعها اولا',
     'different_currencies' => ' عفوا ! عملات االكورسات المختارة مختلفه ',
+    'success' => ' تم بنجاح ',
 ];

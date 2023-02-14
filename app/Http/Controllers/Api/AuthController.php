@@ -155,7 +155,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function socialLogin(Request $request)
     {
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [

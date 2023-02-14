@@ -8,9 +8,23 @@ class ProductImage extends Model
 {
     protected $fillable = ['image', 'product_id', 'product_image'];
 
+    protected $hidden =['created_at','updated_at'];
+
+
+    public function getImageAttribute($image)
+    {
+        if (!empty($image)) {
+
+            return asset('uploads/products') . '/' . $image;
+        }
+        return asset('defaults/default_image.png');
+    }
+
     public function getProductImageAttribute()
     {
+
         if (!empty($this->image)) {
+
             return asset('uploads/products') . '/' . $this->image;
         }
         return asset('defaults/default_image.png');

@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Enums\ResponceStatusCode;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -50,6 +52,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json(msgdata($request, not_found(), trans('lang.not_found'), (object)[]));
+        }
         return parent::render($request, $exception);
     }
 }
