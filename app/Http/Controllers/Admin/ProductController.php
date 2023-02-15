@@ -56,6 +56,7 @@ class ProductController extends AdminController
                 'title_ar' => 'required',
                 'title_en' => 'required',
                 'price' => 'required',
+                'offer' => 'nullable|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
                 'main_image' => 'required'
@@ -96,6 +97,7 @@ class ProductController extends AdminController
                 'title_ar' => 'required',
                 'title_en' => 'required',
                 'price' => 'required',
+                'offer' => 'nullable|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
                 'main_image' => 'nullable'
@@ -124,10 +126,6 @@ class ProductController extends AdminController
     // delete product image
     public function delete_product_image($id)
     {
-        $image_data = ProductImage::where('id', $id)->first();
-        $image = $image_data->image;
-        $publicId = substr($image, 0, strrpos($image, "."));
-        Cloudder::delete($publicId);
         ProductImage::where('id', $id)->delete();
         return redirect()->back();
     }
