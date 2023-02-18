@@ -62,9 +62,7 @@ class HomeController extends Controller
 
     public function cities(Request $request)
     {
-        $sliders = City::where('deleted',"0")->get();
-
-
+        $sliders = City::where('deleted', "0")->get();
         return response()->json(msgdata($request, success(), trans('lang.success'), $sliders));
     }
 
