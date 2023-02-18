@@ -44,6 +44,11 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     //Cart
     Route::Post('add-to-cart', 'CartController@AddToCart');
     Route::Post('remove-from-cart', 'CartController@RemoveFromCart');
+    Route::get('cart', 'CartController@GetCart');
+
+    //orders
+    Route::Post('place-order', 'CartController@MakeOrder');
+    Route::get('my-orders', 'CartController@GetOrders');
 
 
 });
