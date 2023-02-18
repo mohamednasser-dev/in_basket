@@ -38,7 +38,7 @@ class HomeController extends Controller
 
     public function ProductsByCategory($id, Request $request)
     {
-        $sliders = Product::where('category_id', $id)->orderBy('id', 'desc')->get();
+        $sliders = Product::where('sub_category_id', $id)->orderBy('id', 'desc')->get();
         $data = ProductResource::collection($sliders);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }

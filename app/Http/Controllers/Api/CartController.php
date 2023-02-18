@@ -137,12 +137,13 @@ class CartController extends Controller
             foreach ($carts as $key => $cart) {
 
                 $product = Product::where('id', $cart->product_id)->first();
-                $total = $cart->qty * $product->price;
+                $total_price =$product->price - $product->price * ($product->offer/100) ;
+                $total = $cart->qty * $total_price;
                 OrderDetail::create([
                         'product_id' => $cart->product_id,
                         'order_id' => $order->id,
                         'quantity' => $cart->qty,
-                        'price' => $product->price,
+                        'price' => $total_price,
                         'total' => $total,
                     ]
                 );
@@ -151,17 +152,20 @@ class CartController extends Controller
 
             $order->sub_total = $sub_total;
             $discount_amount = 0;
-            if ($discount->active == 1 &&
-                Carbon::now()->format("Y-m-d") > $discount->from_date &&
-                Carbon::now()->format("Y-m-d") < $discount->to_date) {
-                $discount_amount = $sub_total * ($discount->amount / 100);
-                $order->discount = $sub_total * ($discount->amount / 100);
+            if ($discount) {
 
-                $discount->save();
-                CouponUsage::create([
-                    'coupon_id' => $discount->id,
-                    'customer_id' => $user->id
-                ]);
+                if ($discount->active == 1 &&
+                    Carbon::now()->format("Y-m-d") > $discount->from_date &&
+                    Carbon::now()->format("Y-m-d") < $discount->to_date) {
+                    $discount_amount = $sub_total * ($discount->amount / 100);
+                    $order->discount = $sub_total * ($discount->amount / 100);
+
+                    $discount->save();
+                    CouponUsage::create([
+                        'coupon_id' => $discount->id,
+                        'customer_id' => $user->id
+                    ]);
+                }
             }
             $order->total = $sub_total + $order->shipping - $discount_amount;
             $order->save();

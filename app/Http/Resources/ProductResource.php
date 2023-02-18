@@ -20,6 +20,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'discount' => $this->offer,
+            'total_price' => $this->price - $this->price * ($this->offer/100),
             'main_image' => $this->image,
             'images' => $this->whenLoaded('images', function () {
                 return $this->images;
