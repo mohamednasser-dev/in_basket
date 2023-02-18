@@ -41,4 +41,9 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     Route::Post('remove-from-wishlist', 'AuthUserActions@RemoveFromWishlist');
     Route::get('wishlist', 'AuthUserActions@wishlist');
 
+    //Cart
+    Route::Post('add-to-cart', 'CartController@AddToCart');
+    Route::Post('remove-from-cart', 'CartController@RemoveFromCart');
+
+
 });
