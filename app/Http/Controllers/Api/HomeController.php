@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Ad;
 use App\Category;
+use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MainCategoryResource;
 use App\Http\Resources\ProductResource;
@@ -56,6 +57,15 @@ class HomeController extends Controller
         $sliders = Product::whereId($id)->with('images')->firstOrFail();
         $data = new ProductResource($sliders);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
+    }
+
+
+    public function cities(Request $request)
+    {
+        $sliders = City::where('deleted',"0")->get();
+
+
+        return response()->json(msgdata($request, success(), trans('lang.success'), $sliders));
     }
 
 

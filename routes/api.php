@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     Route::post('social-login', 'AuthController@socialLogin');
 
     //Home
+    Route::get('cities', 'HomeController@cities');
     Route::get('sliders', 'HomeController@sliders');
     Route::get('home-product', 'HomeController@homeProduct');
     Route::get('main-categories', 'HomeController@mainCategories');
