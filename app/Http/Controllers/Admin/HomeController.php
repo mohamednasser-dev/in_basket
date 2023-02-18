@@ -16,11 +16,8 @@ class HomeController extends AdminController{
     public function show(){
         $data['users'] = User::count();
         $data['products'] = Product::where('deleted',0)->count();
-        $data['plans'] = Plan::count();
-        $data['ads'] = Ad::count();
-        $data['Order'] = Order::count();
-        $data['contact_us'] = ContactUs::count();
-        return view('admin.home' , ['data' => $data]);   
+        $data['orders'] = Order::count();
+        return view('admin.home' , ['data' => $data]);
     }
 
 }

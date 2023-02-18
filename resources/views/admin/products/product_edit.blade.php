@@ -85,6 +85,12 @@
                                id="price" name="price"
                                placeholder="{{ __('messages.product_price') }}">
                     </div>
+                    <div class="form-group mb-4">
+                        <label for="offer">{{ __('messages.discount') }} (%)</label>
+                        <input required type="number" class="form-control" step="any" min="0" max="100" id="offer"
+                               name="offer"
+                               placeholder="{{ __('messages.discount') }}" value="{{$data->offer}}">
+                    </div>
                     <h4>{{ __('messages.properties') }}</h4>
 
                     <div class="form-group mb-4 arabic-direction">
@@ -126,7 +132,8 @@
                                     <a onclick="return confirm('{{ __('messages.are_you_sure') }}')"
                                        style="position : absolute; right : 20px"
                                        href="{{ route('productImage.delete', $image->id) }}" class="close">x</a>
-                                    <img class="img-thumbnail" style="width:100px;height: 100px;" src="{{ $image->product_image }}"/>
+                                    <img class="img-thumbnail" style="width:100px;height: 100px;"
+                                         src="{{ $image->image }}"/>
                                 </div>
                             @endforeach
                         </div>

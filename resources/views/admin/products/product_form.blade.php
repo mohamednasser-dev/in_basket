@@ -60,6 +60,11 @@
                         <input required type="number" class="form-control" step="any" min="0" id="price" name="price"
                                placeholder="{{ __('messages.product_price') }}" value="">
                     </div>
+                    <div class="form-group mb-4">
+                        <label for="offer">{{ __('messages.discount') }} (%)</label>
+                        <input required type="number" class="form-control" step="any" min="0" max="100" id="offer" name="offer"
+                               placeholder="{{ __('messages.discount') }}" value="0">
+                    </div>
                     <div class="form-group mb-4 arabic-direction">
                         <label for="description_ar">{{ __('messages.product_description_ar') }}</label>
                         <textarea  name="description_ar"

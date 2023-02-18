@@ -56,6 +56,12 @@
                                 {{ $data->price }} {{ __('messages.dinar') }}
                             </td>
                         </tr>
+                        <tr>
+                            <td class="label-table" > <h6>{{ __('messages.discount') }} </h6></td>
+                            <td>
+                                {{ $data->offer }} %
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <h4>{{ __('messages.main_image') }}</h4><br>
@@ -68,7 +74,7 @@
                 <div class="row">
                     @foreach ($data->images as $image)
                         <div style="position : relative" class="col-md-2 product_image">
-                            <img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $image->product_image }}"  />
+                            <img class="img-thumbnail" style="width: 100px; height: 100px;" src="{{ $image->image }}"  />
                         </div>
                     @endforeach
                 </div>
