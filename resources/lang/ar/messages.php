@@ -2,6 +2,10 @@
 return [
 
     //new
+    'sub_total' => 'المجموع الفرعي',
+    'discount_cost' => 'مصاريف الشحن',
+    'order_date' => 'تاريخ الطلب',
+    'customer_name' => 'اسم العميل',
     'product_description_ar' => 'تفاصيل المنتج بالعربية',
     'product_description_en' => 'تفاصيل المنتج بالانجليزية',
     'product_name_ar' => 'اسم المنتج بالعربية',
@@ -39,13 +43,13 @@ return [
     'brand_name' => "اسم العلامة التجارية",
     'orders' => "الطلبات",
     'order' => "الطلب",
-    'notes' => "ملاحظات",
+    'notes' => "الملاحظات",
     'order_details' => "تفاصيل الطلب",
     'quantity' => "الكمية",
     'total' => "الاجمالى",
     'total_bill' => "اجمالى الفاتورة",
     'egy_bound' => "جنية مصرى",
-    'order_code' => "كود الطلب",
+    'order_code' => "رقم الطلب",
     'reject' => "رفض",
     'accept_order' => "قبول الطلب",
     'make_it' => "تنفيذ",

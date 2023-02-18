@@ -17,7 +17,7 @@
                     <thead>
                     <tr>
                         <th class="text-center blue-color">{{ __('messages.order_code') }}</th>
-                        <th class="text-center blue-color">{{ __('messages.name') }}</th>
+                        <th class="text-center blue-color">{{ __('messages.customer_name') }}</th>
                         <th class="text-center blue-color">{{ __('messages.phone') }}</th>
                         <th class="text-center blue-color">{{ __('messages.address') }}</th>
                         <th class="text-center blue-color">{{ __('messages.date') }}</th>
