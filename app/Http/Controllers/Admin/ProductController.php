@@ -97,7 +97,7 @@ class ProductController extends AdminController
                 'title_ar' => 'required',
                 'title_en' => 'required',
                 'price' => 'required',
-                'offer' => 'nullable|min:0|max:100',
+                'offer' => 'nullable|numeric|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
                 'main_image' => 'nullable'
