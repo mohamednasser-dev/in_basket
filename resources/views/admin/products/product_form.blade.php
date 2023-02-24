@@ -62,12 +62,12 @@
                     </div>
                     <div class="form-group mb-4">
                         <label for="offer">{{ __('messages.discount') }} (%)</label>
-                        <input required type="number" class="form-control" min="0" max="100" id="offer" name="offer"
+                        <input required type="number" class="form-control"  min="0" max="100" id="offer" name="offer"
                                placeholder="{{ __('messages.discount') }}" value="0">
                     </div>
                     <div class="form-group mb-4 arabic-direction">
                         <label for="description_ar">{{ __('messages.product_description_ar') }}</label>
-                        <textarea  name="description_ar"
+                        <textarea name="description_ar"
                                   placeholder="{{ __('messages.product_description_ar') }}"
                                   class="form-control" id="description_ar" rows="5"></textarea>
                     </div>
@@ -76,6 +76,15 @@
                         <textarea name="description_en"
                                   placeholder="{{ __('messages.product_description_en') }}"
                                   class="form-control" id="description_en" rows="5"></textarea>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="offer">{{ __('messages.unites') }}</label>
+                        <div class="col-md-1">
+                            <a class="form-control btn btn-success" id="add_unit"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <div id="unit_container">
+
+                        </div>
                     </div>
 
 
@@ -121,5 +130,45 @@
                     $(".tagging").select2({
                         tags: true
                     });
+                </script>
+
+                <script>
+                    $(document).ready(function () {
+                        var i = 0;
+                        $("#add_unit").click(function () {
+                            var html = '';
+                            html += '<div class="row" id="unit_row_' + i + '">' +
+                                '<div class="col-md-3">' +
+                                '<label for="offer">{{ __('messages.unit_ar') }}</label>' +
+                                '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_ar]">' +
+                                '</div>' +
+                                '<div class="col-md-3">' +
+                                '<label for="offer">{{ __('messages.unit_en') }}</label>' +
+                                '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_en]">' +
+                                '</div>' +
+                                '<div class="col-md-2">' +
+                                '<label for="offer">{{ __('messages.quantity') }}</label>' +
+                                '<input required type="number" class="form-control" min="0" name="unites[' + i + '][quantity]"' +
+                                '  placeholder="{{ __('messages.quantity') }}" value="0">' +
+                                ' </div>' +
+                                ' <div class="col-md-3">' +
+                                ' <label for="offer">{{ __('messages.price') }}</label>' +
+                                ' <input required type="number" class="form-control" min="0" name="unites[' + i + '][price]"' +
+                                ' placeholder="{{ __('messages.price') }}" value="0">' +
+                                '</div>' +
+                                ' <div class="col-md-1">' +
+                                ' <label for="offer">{{ __('messages.delete') }}</label>' +
+                                ' <a class="form-control btn btn-danger" onclick="delete_row(' + i + ')" ><i class="fa fa-trash"></i></a>' +
+                                '</div>' +
+                                '</div>';
+
+                            $('#unit_container').append(html);
+                            i++;
+                        });
+                    });
+
+                    function delete_row(i) {
+                        $('#unit_row_' + i).remove();
+                    }
                 </script>
 @endsection

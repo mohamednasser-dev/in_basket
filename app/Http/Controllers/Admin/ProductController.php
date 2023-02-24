@@ -4,16 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category_option;
 use App\Category_option_value;
-use App\Helpers\APIHelpers;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\categories\OptionsValuesController;
 use App\Plan;
 use App\Area;
 use App\Marka;
-use App\Plan_details;
-use App\Product_color;
 use App\Color;
-use App\Product_feature;
+use App\ProductUnit;
 use App\SubCategory;
 use App\SubFiveCategory;
 use App\SubFourCategory;
@@ -21,12 +17,10 @@ use App\SubThreeCategory;
 use App\SubTwoCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use JD\Cloudder\Facades\Cloudder;
 use App\Product;
 use App\ProductImage;
 use App\Category;
 use App\User;
-use App\Setting;
 
 
 class ProductController extends AdminController
@@ -73,6 +67,17 @@ class ProductController extends AdminController
                 $data_image['product_id'] = $product->id;
                 $data_image['image'] = $image;
                 ProductImage::create($data_image);
+            }
+        }
+        if (count($request->unites) > 0) {
+            foreach ($request->unites as $key => $unit) {
+
+                $unit_data['product_id'] = $product->id;
+                $unit_data['unit_ar'] = $unit['unit_ar'];
+                $unit_data['unit_en'] = $unit['unit_en'];
+                $unit_data['quantity'] = $unit['quantity'];
+                $unit_data['price'] = $unit['price'];
+                ProductUnit::create($unit_data);
             }
         }
         session()->flash('success', trans('messages.added_s'));
