@@ -120,6 +120,11 @@ class Product extends Model
         return $this->hasMany('App\Product_feature', 'product_id');
     }
 
+    public function productUnits()
+    {
+        return $this->hasMany('App\ProductUnit', 'product_id');
+    }
+
     public function Views()
     {
         return $this->hasMany('App\Category_option_value', 'product_id');

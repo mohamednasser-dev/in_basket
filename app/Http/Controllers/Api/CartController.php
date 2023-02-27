@@ -12,6 +12,7 @@ use App\Http\Resources\OrderResource;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
+use App\ProductUnit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -25,6 +26,7 @@ class CartController extends Controller
         if ($user) {
             $rules = [
                 'product_id' => ['required', 'exists:products,id'],
+                'unit_id' => ['required', 'exists:product_units,id'],
                 'qty' => ['required', 'numeric'],
 
 
@@ -35,17 +37,17 @@ class CartController extends Controller
             }
             $cart = Cart::where('user_id', $user->id)
                 ->where('product_id', $request->product_id)
+                ->where('unit_id', $request->unit_id)
                 ->first();
             if ($cart) {
-
                 $cart->qty = $request->qty;
-
                 $cart->save();
 
             } else {
                 Cart::create([
                     'user_id' => $user->id,
                     'product_id' => $request->product_id,
+                    'unit_id' => $request->unit_id,
                     'qty' => $request->qty
                 ]);
             }
@@ -87,7 +89,12 @@ class CartController extends Controller
         if ($user) {
 
             $cart = Cart::where('user_id', $user->id)->with('product')->get();
-            $data = CartResource::collection($cart);
+            $total = 0;
+            foreach ($cart as $item) {
+                $total += $item->unit->price * $item->qty;
+            }
+            $data['cart'] = CartResource::collection($cart);
+            $data['total'] = $total;
             return msgdata($request, success(), trans('lang.success'), $data);
         } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
@@ -135,12 +142,13 @@ class CartController extends Controller
 
             $sub_total = 0;
             foreach ($carts as $key => $cart) {
-
                 $product = Product::where('id', $cart->product_id)->first();
-                $total_price =$product->price - $product->price * ($product->offer/100) ;
+                $unit = ProductUnit::where('id', $cart->unit_id)->first();
+                $total_price = $unit->price - $unit->price * ($product->offer / 100);
                 $total = $cart->qty * $total_price;
                 OrderDetail::create([
                         'product_id' => $cart->product_id,
+                        'unit_id' => $cart->unit_id,
                         'order_id' => $order->id,
                         'quantity' => $cart->qty,
                         'price' => $total_price,

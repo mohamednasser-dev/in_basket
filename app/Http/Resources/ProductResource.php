@@ -18,10 +18,11 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'price' => $this->price,
-            'discount' => $this->offer,
-            'total_price' => $this->price - $this->price * ($this->offer/100),
+            //   'price' => $this->price,
+              'discount' => $this->offer,
+            //  'total_price' => $this->price - $this->price * ($this->offer / 100),
             'main_image' => $this->image,
+            'units' => ProductUnitsResource::collection($this->productUnits),
             'images' => $this->whenLoaded('images', function () {
                 return $this->images;
             })
