@@ -15,7 +15,7 @@ class AuthUserActions extends Controller
 {
     public function AddToWishlist(Request $request)
     {
-        $user = check_api_token($request->header('jwt'));
+            $user = check_api_token($request->header('jwt'));
         if ($user) {
 
             $rules = [
@@ -64,14 +64,14 @@ class AuthUserActions extends Controller
         }
     }
 
-    public function wishlist( Request $request)
+    public function wishlist(Request $request)
     {
         $user = check_api_token($request->header('jwt'));
         if ($user) {
-            $wishlist = Wishlist::where('user_id',$user->id)->get();
+            $wishlist = Wishlist::where('user_id', $user->id)->get();
             $data = WishlistResource::collection($wishlist);
             return response()->json(msgdata($request, success(), trans('lang.success'), $data));
-        }else{
+        } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
         }
 

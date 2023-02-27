@@ -24,8 +24,14 @@ class HomeController extends Controller
 
     public function homeProduct(Request $request)
     {
+        $user = check_api_token($request->header('jwt'));
+        if($user){
+            $user_id = $user->id;
+        }else{
+            $user_id =null;
+        }
         $sliders = Product::where('offer', '!=', 0)->orderBy('id', 'desc')->get();
-        $data = ProductResource::collection($sliders);
+        $data = ProductResource::customCollection($sliders ,$user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
 
@@ -39,8 +45,14 @@ class HomeController extends Controller
 
     public function ProductsByCategory($id, Request $request)
     {
+        $user = check_api_token($request->header('jwt'));
+        if($user){
+            $user_id = $user->id;
+        }else{
+            $user_id =null;
+        }
         $sliders = Product::where('sub_category_id', $id)->orderBy('id', 'desc')->get();
-        $data = ProductResource::collection($sliders);
+        $data = ProductResource::customCollection($sliders ,$user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
 
@@ -54,8 +66,15 @@ class HomeController extends Controller
 
     public function productDetails($id, Request $request)
     {
+        $user = check_api_token($request->header('jwt'));
+        if($user){
+            $user_id = $user->id;
+        }else{
+            $user_id =null;
+        }
+
         $sliders = Product::whereId($id)->with('images')->firstOrFail();
-        $data = new ProductResource($sliders);
+        $data = (new ProductResource($sliders))->user_id($user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
 
