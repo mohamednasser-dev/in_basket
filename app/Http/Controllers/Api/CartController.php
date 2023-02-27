@@ -40,7 +40,7 @@ class CartController extends Controller
                 ->where('unit_id', $request->unit_id)
                 ->first();
             if ($cart) {
-                $cart->qty = $request->qty;
+                $cart->qty += $request->qty;
                 $cart->save();
 
             } else {
