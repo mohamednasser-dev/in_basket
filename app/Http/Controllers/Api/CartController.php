@@ -100,6 +100,41 @@ class CartController extends Controller
     }
 
 
+    public function increaseCart(Request $request, $id)
+    {
+        $user = check_api_token($request->header('jwt'));
+        if ($user) {
+
+            $cart = Cart::whereId($id)->first();
+            if (!$cart) {
+                return msgdata($request, not_found(), trans('lang.not_found'), (object)[]);
+            }
+            $cart->qty += 1;
+            $cart->save();
+            return msgdata($request, success(), trans('lang.success'), (object)[]);
+        } else {
+            return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
+        }
+    }
+
+    public function decreaseCart(Request $request, $id)
+    {
+        $user = check_api_token($request->header('jwt'));
+        if ($user) {
+
+            $cart = Cart::whereId($id)->first();
+            if (!$cart) {
+                return msgdata($request, not_found(), trans('lang.not_found'), (object)[]);
+            }
+            $cart->qty -= 1;
+            $cart->save();
+            return msgdata($request, success(), trans('lang.success'), (object)[]);
+        } else {
+            return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
+        }
+    }
+
+
     public function MakeOrder(Request $request)
     {
         $user = check_api_token($request->header('jwt'));
