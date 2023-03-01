@@ -65,18 +65,16 @@ class CartController extends Controller
         if ($user) {
 
             $rules = [
-                'product_id' => ['required', 'exists:products,id',
-                    Rule::exists('carts')->where(function ($query) use ($user, $request) {
-                        return $query->where('product_id', $request->product_id)
-                            ->where('user_id', $user->id);
-                    }),],
+                'cart_id' => ['required', 'exists:carts,id',],
 
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return msgdata($request, failed(), $validator->messages()->first(), (object)[]);
             }
-            Cart::where('user_id', $user->id)->where('product_id', $request->product_id)->delete();
+
+            $cart = Cart::whereId($request->cart_id)->delete();
+
             return msgdata($request, success(), trans('lang.success'), (object)[]);
         } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
