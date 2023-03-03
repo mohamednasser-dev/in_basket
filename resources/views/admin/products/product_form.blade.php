@@ -56,6 +56,16 @@
                                placeholder="{{ __('messages.product_name_en') }}" value="">
                     </div>
                     <div class="form-group mb-4">
+                        <label for="price">الكمية الحالية في المخزن</label>
+                        <input required type="number" class="form-control" min="0" id="stock" name="stock"
+                               placeholder="الكمية الحالية في المخزن" value="">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="price">كمية التنبية</label>
+                        <input required type="number" class="form-control" min="0" id="stock_alert" name="stock_alert"
+                               placeholder="كمية التنبية" value="">
+                    </div>
+                    <div class="form-group mb-4">
                         <label for="price">{{ __('messages.product_price') }}</label>
                         <input required type="number" class="form-control" step="any" min="0" id="price" name="price"
                                placeholder="{{ __('messages.product_price') }}" value="">

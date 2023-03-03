@@ -14,10 +14,22 @@ class OrdersController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Order::orderBy('id','desc')->get();
-        return view('admin.orders.index',compact('data'));
+        $data = Order::Query();
+
+        if ($request->user_id && $request->user_id != 'all_users') {
+            $data = $data->where('user_id', $request->user_id);
+        }
+        if ($request->status && $request->status != 'all') {
+            $data = $data->where('status', $request->status);
+        }
+
+        if ($request->from_date && $request->to_date) {
+            $data = $data->whereDate('created_at', '>=', $request->from_date)->where('created_at', '<=', $request->to_date);
+        }
+        $data = $data->orderBy('id', 'desc')->get();
+        return view('admin.orders.index', compact('data'));
     }
 
     /**
@@ -33,7 +45,7 @@ class OrdersController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,29 +56,30 @@ class OrdersController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data = Order::where('id',$id)->first();
-        return view('admin.orders.order_details',compact('data'));
+        $data = Order::where('id', $id)->first();
+        return view('admin.orders.order_details', compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
     }
-    public function change_status( $status ,$id)
+
+    public function change_status($status, $id)
     {
         $data['status'] = $status;
-        Order::where('id',$id)->update($data);
+        Order::where('id', $id)->update($data);
         session()->flash('success', trans('messages.status_changed_s'));
         return back();
     }

@@ -80,6 +80,18 @@
                                placeholder="{{ __('messages.product_name_en') }}">
                     </div>
                     <div class="form-group mb-4">
+                        <label for="price">الكمية الحالية في المخزن</label>
+                        <input required type="number" class="form-control" min="0" value="{{$data->stock}}" id="stock"
+                               name="stock"
+                               placeholder="الكمية الحالية في المخزن">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="price">كمية التنبية</label>
+                        <input required type="number" class="form-control" value="{{$data->stock_alert}}" min="0"
+                               id="stock_alert" name="stock_alert"
+                               placeholder="كمية التنبية">
+                    </div>
+                    <div class="form-group mb-4">
                         <label for="price">{{ __('messages.product_price') }}</label>
                         <input required type="number" class="form-control" value="{{$data->price}}" step="any" min="0"
                                id="price" name="price"
@@ -102,6 +114,49 @@
                         <label for="description_en">{{ __('messages.product_description_en') }}</label>
                         <textarea name="description_en" placeholder="{{ __('messages.product_description_en') }}"
                                   class="form-control" id="description_en" rows="5">{{$data->description_en}}</textarea>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="offer">{{ __('messages.unites') }}</label>
+                        <div class="col-md-1">
+                            <a class="form-control btn btn-success" id="add_unit"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <div id="unit_container">
+                            @if(count($data->productUnits) > 0 )
+                                @foreach($data->productUnits as $key => $row)
+                                    <div class="row" id="unit_old_row_{{$key}}">
+                                        <div class="col-md-3">
+                                            <label for="offer">{{ __('messages.unit_ar') }}</label>
+                                            <input required type="text" class="form-control" min="0" maxlength="255"
+                                                   value="{{$row->unit_ar}}"
+                                                   name="unites[{{$key}}][unit_ar]">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="offer">{{ __('messages.unit_en') }}</label>
+                                            <input required type="text" class="form-control" min="0" maxlength="255"
+                                                   value="{{$row->unit_en}}"
+                                                   name="unites[{{$key}}][unit_en]">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="offer">{{ __('messages.quantity') }}</label>
+                                            <input required type="number" class="form-control" min="0"
+                                                   name="unites[{{$key}}][quantity]" value="{{$row->quantity}}"
+                                                   placeholder="{{ __('messages.quantity') }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="offer">{{ __('messages.price') }}</label>
+                                            <input required type="number" class="form-control" min="0"
+                                                   name="unites[{{$key}}][price]" value="{{$row->price}}"
+                                                   placeholder="{{ __('messages.price') }}">
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label for="offer">{{ __('messages.delete') }}</label>
+                                            <a class="form-control btn btn-danger" onclick="delete_old_row({{$key}})"><i
+                                                    class="fa fa-trash"></i></a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                    @endif
+                        </div>
                     </div>
                     <div class="form-group mb-4">
                         <label for="">{{ __('messages.main_image') }}</label><br>
@@ -164,5 +219,49 @@
                     $(".tagging").select2({
                         tags: true
                     });
+                </script>
+
+                <script>
+                    $(document).ready(function () {
+                        var i = {{count($data->productUnits)}};
+                        $("#add_unit").click(function () {
+                            var html = '';
+                            html += '<div class="row" id="unit_row_' + i + '">' +
+                                '<div class="col-md-3">' +
+                                '<label for="offer">{{ __('messages.unit_ar') }}</label>' +
+                                '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_ar]">' +
+                                '</div>' +
+                                '<div class="col-md-3">' +
+                                '<label for="offer">{{ __('messages.unit_en') }}</label>' +
+                                '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_en]">' +
+                                '</div>' +
+                                '<div class="col-md-2">' +
+                                '<label for="offer">{{ __('messages.quantity') }}</label>' +
+                                '<input required type="number" class="form-control" min="0" name="unites[' + i + '][quantity]"' +
+                                '  placeholder="{{ __('messages.quantity') }}" value="0">' +
+                                ' </div>' +
+                                ' <div class="col-md-3">' +
+                                ' <label for="offer">{{ __('messages.price') }}</label>' +
+                                ' <input required type="number" class="form-control" min="0" name="unites[' + i + '][price]"' +
+                                ' placeholder="{{ __('messages.price') }}" value="0">' +
+                                '</div>' +
+                                ' <div class="col-md-1">' +
+                                ' <label for="offer">{{ __('messages.delete') }}</label>' +
+                                ' <a class="form-control btn btn-danger" onclick="delete_row(' + i + ')" ><i class="fa fa-trash"></i></a>' +
+                                '</div>' +
+                                '</div>';
+
+                            $('#unit_container').append(html);
+                            i++;
+                        });
+                    });
+
+                    function delete_row(i) {
+                        $('#unit_row_' + i).remove();
+                    }
+
+                    function delete_old_row(i) {
+                        $('#unit_old_row_' + i).remove();
+                    }
                 </script>
 @endsection

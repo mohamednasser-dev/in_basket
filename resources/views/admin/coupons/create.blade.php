@@ -44,6 +44,15 @@
                            step="any"
                     />
                 </div>
+                .
+                <div class="form-group  col-6">
+                    <label>عدد مرات استخدام كوبون الخصم لليوزر الواحد <span
+                            class="text-danger">*</span></label>
+                    <input required name="usage_count" min="0"
+                           value="{{ old('usage_count', $data->usage_count ?? '') }}"
+                           class="form-control  {{ $errors->has('amount') ? 'border-danger' : '' }}" type="number"
+                    />
+                </div>
                 <input type="submit" value="{{ __('messages.add') }}" class="btn btn-primary">
             </form>
         </div>

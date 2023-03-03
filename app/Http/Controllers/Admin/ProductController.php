@@ -49,11 +49,14 @@ class ProductController extends AdminController
                 'sub_category_id' => 'required',
                 'title_ar' => 'required',
                 'title_en' => 'required',
-                'price' => 'required',
+                'price' => 'required|numeric|min:0',
+                'stock' => 'required|numeric|min:0',
+                'stock_alert' => 'required|numeric|min:0',
                 'offer' => 'nullable|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
-                'main_image' => 'required'
+                'main_image' => 'required',
+                'unites' => 'required|array|min:1'
             ]);
 
         $data['user_id'] = auth()->user()->id;
@@ -101,6 +104,8 @@ class ProductController extends AdminController
                 'sub_category_id' => 'required',
                 'title_ar' => 'required',
                 'title_en' => 'required',
+                'stock' => 'required|numeric|min:0',
+                'stock_alert' => 'required|numeric|min:0',
                 'price' => 'required',
                 'offer' => 'nullable|numeric|min:0|max:100',
                 'description_ar' => 'nullable',
@@ -122,6 +127,17 @@ class ProductController extends AdminController
                     $data_image['image'] = $image;
                     ProductImage::create($data_image);
                 }
+            }
+        }
+        if (count($request->unites) > 0) {
+            ProductUnit::where('product_id', $id)->delete();
+            foreach ($request->unites as $key => $unit) {
+                $unit_data['product_id'] = $id;
+                $unit_data['unit_ar'] = $unit['unit_ar'];
+                $unit_data['unit_en'] = $unit['unit_en'];
+                $unit_data['quantity'] = $unit['quantity'];
+                $unit_data['price'] = $unit['price'];
+                ProductUnit::create($unit_data);
             }
         }
         session()->flash('success', trans('messages.updated_s'));

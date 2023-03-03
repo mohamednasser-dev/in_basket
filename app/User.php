@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -29,6 +30,8 @@ class User extends Authenticatable implements JWTSubject
 
     ];
     use Notifiable;
+
+    protected $appends = ['diff_days'];
 
     public function setPasswordAttribute($password)
     {
@@ -64,6 +67,25 @@ class User extends Authenticatable implements JWTSubject
 
     public function orders()
     {
-        return $this->hasMany('App\User', 'user_id');
+        return $this->hasMany('App\Order', 'user_id');
+    }
+
+    public function last_order()
+    {
+        return $this->hasOne('App\Order', 'user_id')->orderBy('created_at', 'desc');
+    }
+
+
+    public function getDiffDaysAttribute()
+    {
+
+        if ($this->last_order) {
+            $start = Carbon::parse($this->last_order->created_at);
+            $now = Carbon::now();
+            $days_count = $start->diffInDays($now);
+            return $days_count;
+        } else {
+            return 0;
+        }
     }
 }
