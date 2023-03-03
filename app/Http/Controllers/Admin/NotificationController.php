@@ -65,7 +65,7 @@ class NotificationController extends AdminController
         $notification->body = $request->body;
         $notification->body_en = $request->body_en;
         $notification->save();
-        if ($request->user_id == 'all_users') {
+        if (in_array('all_users', $request->user_id)) {
             $users = User::select('id', 'fcm_token')->where('fcm_token', '!=', null)->get();
             foreach ($users as $key => $user) {
                 $fcm_tokens[$key] = $user->fcm_token;
@@ -75,12 +75,14 @@ class NotificationController extends AdminController
                 $user_notification->save();
             }
         } else {
-            $user = User::select('id', 'fcm_token')->where('id', $request->user_id)->where('fcm_token', '!=', null)->first();
-            $fcm_tokens[0] = $user->fcm_token;
-            $user_notification = new UserNotification();
-            $user_notification->user_id = $user->id;
-            $user_notification->notification_id = $notification->id;
-            $user_notification->save();
+            $users = User::select('id', 'fcm_token')->whereIn('id', $request->user_id)->where('fcm_token', '!=', null)->get();
+            foreach ($users as $key => $user) {
+                $fcm_tokens[$key] = $user->fcm_token;
+                $user_notification = new UserNotification();
+                $user_notification->user_id = $user->id;
+                $user_notification->notification_id = $notification->id;
+                $user_notification->save();
+            }
         }
         $notificationss = APIHelpers::send_notification($notification->title, $notification->body, null, null, $fcm_tokens);
         return redirect('admin-panel/notifications/show');

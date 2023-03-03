@@ -45,11 +45,20 @@
                     <div class="form-group inside">
                         <label for="users">المستخدم</label>
                         @php $users = \App\User::where('fcm_token', '!=', null)->where('deleted',0)->get(); @endphp
-                        <select required class="form-control tagging" name="user_id">
+                        <select required class="form-control tagging" name="user_id[]" multiple="multiple" >
                             <option value="all_users">كل المستخدمين</option>
                             @foreach ($users as $row)
-                                <option value='{{$row->id}}' @if(request()->user_id == $row->id) selected @endif >
-                                    {{$row->name}}
+                                <option @if( $row->diff_days > 43200 || $row->diff_days == null ) style="background-color: #ff9999;"
+                                        @endif
+                                        value='{{$row->id}}' @if(request()->user_id == $row->id) selected @endif >
+                                    {{$row->name}}  &nbsp;
+(
+                                    @if($row->diff_days == null)  لم يتم
+                                    الطلب @else
+                                        {{ $row->last_order ? \Carbon\Carbon::createFromTimeStamp(strtotime($row->last_order->created_at))->diffForHumans() : ''}}
+                                    @endif
+
+                                    )
                                 </option>
                             @endforeach
                         </select>

@@ -78,14 +78,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function getDiffDaysAttribute()
     {
-
         if ($this->last_order) {
             $start = Carbon::parse($this->last_order->created_at);
             $now = Carbon::now();
-            $days_count = $start->diffInDays($now);
+            $days_count = $start->diffInMinutes($now);
             return $days_count;
         } else {
-            return 0;
+            return null;
         }
     }
 }
