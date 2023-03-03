@@ -19,8 +19,8 @@ class AuthController extends Controller
         $data = $request->all();
         $validator = Validator::make($data, [
             'name' => 'required|string',
+            'phone' => 'required|regex:/(01)[0125][0-9]{8}/|unique:users,phone',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|unique:users,phone',
             'password' => 'required',
             'fcm_token' => 'required',
 
@@ -162,7 +162,7 @@ class AuthController extends Controller
             'social_id' => 'required',
             'fcm_token' => 'required',
             'email' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/(01)[0125][0-9]{8}/|unique:users,phone',
         ]);
         if (!is_array($validator) && $validator->fails()) {
             return response()->json(['status' => 401, 'msg' => $validator->messages()->first()]);
