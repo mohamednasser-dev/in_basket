@@ -51,18 +51,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="label-table"><h6>الكمية الحالية في المخزن </h6></td>
-                            <td>
-                                {{ $data->stock }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label-table"><h6>كمية التنبية </h6></td>
-                            <td>
-                                {{ $data->stock_alert }}
-                            </td>
-                        </tr>
-                        <tr>
                             <td class="label-table"><h6>{{ __('messages.product_price') }} </h6></td>
                             <td>
                                 {{ $data->price }} {{ __('messages.dinar') }}

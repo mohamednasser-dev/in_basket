@@ -85,9 +85,8 @@ class OrdersController extends AdminController
         if ($status == 'rejected') {
             if (count($order->OrderDetails) > 0) {
                 foreach ($order->OrderDetails as $row) {
-                    $return_stock = $row->quantity * $row->Unit->quantity;
                     $unit = ProductUnit::where('id', $row->unit_id)->first();
-                    $unit->stock = $unit->stock + $return_stock;
+                    $unit->stock = $unit->stock + $row->quantity;
                     $unit->save();
                 }
             }
