@@ -63,6 +63,7 @@
 </script>
 <script>
     $('#html5-extension').DataTable({
+        order:false,
         buttons: {
             buttons: [
                 {extend: 'csv', className: 'btn'},

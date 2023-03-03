@@ -2,6 +2,9 @@
 return [
 
     //new
+    'product_unites' => 'وحدات المنتج',
+    'stock_alert' => 'كمية التنبية',
+    'stock' => 'الكمية في المخزن',
     'execution' => 'جاري التجهيز',
     'last_order_date' => 'وقت اخر طلبية',
     'unites' => 'الوحدات',

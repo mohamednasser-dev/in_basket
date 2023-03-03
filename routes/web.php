@@ -219,8 +219,17 @@ Route::group(['middleware' => 'language', 'prefix' => "admin-panel", 'namespace'
         Route::get('delete/productimage/{id}', 'ProductController@delete_product_image')->name("productImage.delete");
         Route::get('details/{product_id}', 'ProductController@details')->name("products.details");
         Route::get('delete/{product}', 'ProductController@delete')->name("delete.product");
+
     });
 
+    Route::group(["prefix" => "unites", 'as' => 'unites'], function ($router) {
+        Route::get('/{product_id}', 'UnitesController@index')->name(".index");
+        Route::get('/create/{id}', 'UnitesController@create')->name(".create");
+        Route::post('/store', 'UnitesController@store')->name(".store");
+        Route::get('/edit/{id}', 'UnitesController@edit')->name(".edit");
+        Route::post('/update/{id}', 'UnitesController@update')->name(".update");
+        Route::get('/delete/{id}', 'UnitesController@delete')->name(".delete");
+    });
     // Plans Routes
     Route::resource('plans', 'PlanController');
     Route::get('show_div/{type}', 'PlanController@show_div');

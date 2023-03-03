@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\ProductUnit;
 use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
@@ -28,7 +29,7 @@ class OrdersController extends AdminController
         if ($request->from_date && $request->to_date) {
             $data = $data->whereDate('created_at', '>=', $request->from_date)->where('created_at', '<=', $request->to_date);
         }
-        $data = $data->orderBy('id', 'desc')->get();
+        $data = $data->orderBy('created_at', 'desc')->get();
         return view('admin.orders.index', compact('data'));
     }
 
@@ -79,7 +80,18 @@ class OrdersController extends AdminController
     public function change_status($status, $id)
     {
         $data['status'] = $status;
+        $order = Order::findOrFail($id);
         Order::where('id', $id)->update($data);
+        if ($status == 'rejected') {
+            if (count($order->OrderDetails) > 0) {
+                foreach ($order->OrderDetails as $row) {
+                    $return_stock = $row->quantity * $row->Unit->quantity;
+                    $unit = ProductUnit::where('id', $row->unit_id)->first();
+                    $unit->stock = $unit->stock + $return_stock;
+                    $unit->save();
+                }
+            }
+        }
         session()->flash('success', trans('messages.status_changed_s'));
         return back();
     }

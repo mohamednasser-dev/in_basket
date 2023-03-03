@@ -17,7 +17,6 @@ class AddColumnToCartsTable extends Migration
             //unit_id
             $table->bigInteger('unit_id')->unsigned();
             $table->foreign('unit_id')->references('id')->on('product_units')->onDelete('cascade');
-
         });
     }
 
