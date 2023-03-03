@@ -20,7 +20,7 @@ class OrderDetailsResource extends JsonResource
             'quantity' => $this->quantity,
             'price' => $this->price,
             'total' => $this->total,
-            'unit_selected' => $this->unit,
+            'unit_selected' => new ProductUnitsResource($this->Unit),
 
 
         ];
