@@ -2,6 +2,8 @@
 return [
 
     //new
+    'execution' => 'جاري التجهيز',
+    'last_order_date' => 'وقت اخر طلبية',
     'unites' => 'الوحدات',
     'unit_en' => 'الوحدة بالانجليزية',
     'unit_ar' => 'الوحدة بالعربية',
@@ -267,7 +269,7 @@ return [
     "show_notifications" => "عرض التنبيهات",
     "notification_details" => "تفاصيل تنبية",
     "notification_body" => "محتوي التنبية",
-    "send_new_notification" => "إرسال تنبية جديد",
+    "send_new_notification" => "إرسال إشعار جديد",
     "resend_this_notification" => "إعادة إرسال هذا التنبيه",
     "users_count" => "عدد المستخدمين",
     "contact_us_count" => "عدد رسائل صندوق الشكاوى",

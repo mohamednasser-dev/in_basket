@@ -13,6 +13,7 @@ class Order extends Model
         'total',
     ];
 
+    const STATUS = ['new', 'execution', 'arrived', 'rejected', 'accept'];
     public $new = "new";
     public $accept = "accept";
     public $execution = "execution";
@@ -28,7 +29,7 @@ class Order extends Model
     public
     function user()
     {
-        return $this->belongsTo('App/User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

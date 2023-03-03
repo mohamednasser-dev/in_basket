@@ -9,29 +9,59 @@
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <h4>{{ __('messages.send_new_notification') }}</h4>
-                 </div>
-        </div>
-        <form action="" method="post" enctype="multipart/form-data" >
-			
-            @csrf
-            <div class="custom-file-container" data-upload-id="myFirstImage">
-                <label>{{ __('messages.upload') }} ({{ __('messages.single_image') }}) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
-                <label class="custom-file-container__custom-file" >
-                    <input type="file"  name="image" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-                    <span class="custom-file-container__custom-file__custom-file-control"></span>
-                </label>
-                <div class="custom-file-container__image-preview"></div>
-            </div>            
-            <div class="form-group mb-4">
-                <label for="title">{{ __('messages.notification_title') }}</label>
-                <input required type="text" name="title" class="form-control" id="title" placeholder="{{ __('messages.notification_title') }}" value="" >
+                    </div>
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    @csrf
+                    {{--            <div class="custom-file-container" data-upload-id="myFirstImage">--}}
+                    {{--                <label>{{ __('messages.upload') }} ({{ __('messages.single_image') }}) <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>--}}
+                    {{--                <label class="custom-file-container__custom-file" >--}}
+                    {{--                    <input type="file"  name="image" class="custom-file-container__custom-file__custom-file-input" accept="image/*">--}}
+                    {{--                    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />--}}
+                    {{--                    <span class="custom-file-container__custom-file__custom-file-control"></span>--}}
+                    {{--                </label>--}}
+                    {{--                <div class="custom-file-container__image-preview"></div>--}}
+                    {{--            </div>            --}}
+                    <div class="form-group mb-4">
+                        <label for="title">عنوان الاشعار بالعربية</label>
+                        <input required type="text" name="title" class="form-control" id="title"
+                               value="">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="title">عنوان الاشعار بالانجليزية</label>
+                        <input required type="text" name="title_en" class="form-control" id="title_en"
+                               value="">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="body">محتوى الاشعار بالعربية</label>
+                        <textarea required name="body" class="form-control" rows="5"
+                        ></textarea>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="body">محتوى الاشعار بالانجليزية</label>
+                        <textarea required name="body_en" class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group inside">
+                        <label for="users">المستخدم</label>
+                        @php $users = \App\User::where('fcm_token', '!=', null)->where('deleted',0)->get(); @endphp
+                        <select required class="form-control tagging" name="user_id">
+                            <option value="all_users">كل المستخدمين</option>
+                            @foreach ($users as $row)
+                                <option value='{{$row->id}}' @if(request()->user_id == $row->id) selected @endif >
+                                    {{$row->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <input type="submit" value="{{ __('messages.submit') }}" class="btn btn-primary">
+                </form>
             </div>
-            <div class="form-group mb-4">
-                <label for="body">{{ __('messages.notification_body') }}</label>
-                <input required type="text" name="body" class="form-control" id="body" placeholder="{{ __('messages.notification_body') }}" value="" >
-            </div>
-            <input type="submit" value="{{ __('messages.submit') }}" class="btn btn-primary">
-        </form>
-    </div>
+            @endsection
+            @section('scripts')
+                <script>
+                    $(".tagging").select2({
+                        tags: true
+                    });
+                </script>
 @endsection
