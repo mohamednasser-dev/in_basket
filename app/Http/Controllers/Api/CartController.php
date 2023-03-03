@@ -179,9 +179,11 @@ class CartController extends Controller
                 $unit = ProductUnit::where('id', $cart->unit_id)->first();
                 $total_price = $unit->price - $unit->price * ($product->offer / 100);
                 $total = $cart->qty * $total_price;
+
                 OrderDetail::create([
                         'product_id' => $cart->product_id,
-                        'unit_id' => $cart->unit_id,
+                        'unit_ar' => $unit->unit_ar,
+                        'unit_en' => $unit->unit_en,
                         'order_id' => $order->id,
                         'quantity' => $cart->qty,
                         'price' => $total_price,
