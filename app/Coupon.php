@@ -8,4 +8,6 @@ class Coupon extends Model
 {
     protected $guarded = [];
 
+    const TYPE = ['percentage','amount'];
+
 }

@@ -2,6 +2,8 @@
 return [
 
     //new
+    'type_amount' => 'بالمقدار',
+    'type_percentage' => 'بالنسبة',
     'product_unites' => 'وحدات المنتج',
     'stock_alert' => 'كمية التنبية',
     'stock' => 'الكمية في المخزن',

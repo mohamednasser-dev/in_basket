@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\City;
 use App\Area;
+use Illuminate\Validation\Rule;
 
 
 class CouponsController extends AdminController
@@ -41,7 +42,9 @@ class CouponsController extends AdminController
                 'code' => ['required', 'string', 'max:25'],
                 'from_date' => 'required|date|after_or_equal:' . Carbon::now()->format('Y-m-d'),
                 'to_date' => 'required|date|after_or_equal:from_date',
+                'type' => ['required', Rule::in(Coupon::TYPE)],
                 'amount' => 'required|numeric|min:0',
+                'usage_count' => 'required|numeric|min:0',
             ]);
         Coupon::create($data);
         session()->flash('success', trans('messages.added_s'));
@@ -80,7 +83,10 @@ class CouponsController extends AdminController
                 'code' => ['required', 'string', 'max:25'],
                 'from_date' => 'required|date|after_or_equal:' . Carbon::now()->format('Y-m-d'),
                 'to_date' => 'required|date|after_or_equal:from_date',
+                'type' => ['required', Rule::in(Coupon::TYPE)],
                 'amount' => 'required|numeric|min:0',
+                'usage_count' => 'required|numeric|min:0',
+
             ]);
         Coupon::findOrFail($id)->update($data);
         session()->flash('success', trans('messages.updated_s'));

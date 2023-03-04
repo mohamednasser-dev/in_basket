@@ -36,11 +36,30 @@
                     />
                 </div>
                 <div class="form-group  col-6">
+                    <label>نوع الخصم<span
+                            class="text-danger">*</span></label>
+                    <select class="form-control" name="type">
+                        @foreach (\App\Coupon::TYPE as $row)
+                            <option
+                                value='{{$row}}'
+                                @if($data->type == $row) selected @endif > {{trans('messages.type_'.$row)}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group  col-6">
                     <label>مقدار الخصم <span
                             class="text-danger">*</span></label>
                     <input required name="amount" min="0" max="100" value="{{ old('amount', $data->amount ?? '') }}"
                            class="form-control  {{ $errors->has('amount') ? 'border-danger' : '' }}" type="number"
                            step="any"
+                    />
+                </div>
+                <div class="form-group  col-6">
+                    <label>عدد مرات استخدام كوبون الخصم لليوزر الواحد <span
+                            class="text-danger">*</span></label>
+                    <input required name="usage_count" min="0"
+                           value="{{ old('usage_count', $data->usage_count ?? '') }}"
+                           class="form-control  {{ $errors->has('usage_count') ? 'border-danger' : '' }}" type="number"
                     />
                 </div>
                 <input type="submit" value="{{ __('messages.edit') }}" class="btn btn-primary">
