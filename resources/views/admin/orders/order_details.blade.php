@@ -185,6 +185,7 @@
                                     <th class="text-center blue-color">Id</th>
                                     <th class="text-center blue-color">{{ __('messages.image') }}</th>
                                     <th class="text-center blue-color">{{ __('messages.product_name') }}</th>
+                                    <th class="text-center blue-color">الوحدة</th>
                                     <th class="text-center blue-color">{{ __('messages.quantity') }}</th>
                                     <th class="text-center blue-color">{{ __('messages.price') }}</th>
                                     <th class="text-center blue-color">{{ __('messages.total') }}</th>
@@ -198,6 +199,7 @@
                                         <td class="text-center"><img style="height: 50px;"
                                                                      src="{{ $row->Product->image }}"/></td>
                                         <td class="text-center blue-color">{{ $row->Product->title }}</td>
+                                        <td class="text-center blue-color">{{ $row->Unit->title }}</td>
                                         <td class="text-center blue-color">{{ $row->quantity }}</td>
                                         <td class="text-center blue-color">{{ $row->price }}</td>
                                         <td class="text-center blue-color">{{ $row->total }}</td>
