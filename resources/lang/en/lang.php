@@ -51,4 +51,5 @@ return [
     'there_is_late_installments' => 'there is late installments',
     'different_currencies' => 'Sorry! Courses have different currencies',
     'success' => 'Done Successfully',
+    'stock_error' => 'stock not enough',
 ];

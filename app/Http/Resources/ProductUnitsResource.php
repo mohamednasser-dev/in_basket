@@ -19,6 +19,7 @@ class ProductUnitsResource extends JsonResource
             'title' => $this->title,
             'price' => $this->price,
             'quantity' => $this->quantity,
+            'stock' => $this->stock,
 
 
         ];
