@@ -49,4 +49,5 @@ return [
     'there_is_late_installments' => 'يوجد اقسطا متاخرة يجب دفعها اولا',
     'different_currencies' => ' عفوا ! عملات االكورسات المختارة مختلفه ',
     'success' => ' تم بنجاح ',
+    'stock_error' => 'الكمية فى المخزن ليست كافية',
 ];

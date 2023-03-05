@@ -15,6 +15,7 @@ use App\Product;
 use App\ProductUnit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Validator;
 
@@ -29,21 +30,31 @@ class CartController extends Controller
                 'unit_id' => ['required', 'exists:product_units,id'],
                 'qty' => ['required', 'numeric'],
 
-
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return msgdata($request, failed(), $validator->messages()->first(), (object)[]);
             }
+            $unit = ProductUnit::where('id', $request->unit_id)->first();
+
             $cart = Cart::where('user_id', $user->id)
                 ->where('product_id', $request->product_id)
                 ->where('unit_id', $request->unit_id)
                 ->first();
+
+
             if ($cart) {
                 $cart->qty += $request->qty;
+                if ($unit && $unit->stock < $cart->qty) {
+                    return msgdata($request, failed(), trans('lang.stock_error'), (object)[]);
+                }
+
                 $cart->save();
 
             } else {
+                if ($unit && $unit->stock < $request->qty) {
+                    return msgdata($request, failed(), trans('lang.stock_error'), (object)[]);
+                }
                 Cart::create([
                     'user_id' => $user->id,
                     'product_id' => $request->product_id,
@@ -106,6 +117,11 @@ class CartController extends Controller
         if ($user) {
 
             $cart = Cart::whereId($id)->first();
+            $unit = ProductUnit::where('id', $cart->unit_id)->first();
+
+            if ($unit && $unit->stock < $cart->qty + 1) {
+                return msgdata($request, failed(), trans('lang.stock_error'), (object)[]);
+            }
             if (!$cart) {
                 return msgdata($request, not_found(), trans('lang.not_found'), (object)[]);
             }
@@ -160,6 +176,7 @@ class CartController extends Controller
             $city = City::whereId($request->city_id)->first();
             $discount = Coupon::where('code', $request->coupon)->first();
 
+            DB::beginTransaction();
             $order = Order::create([
                 'name' => $user->name,
                 'phone' => $user->phone,
@@ -175,8 +192,13 @@ class CartController extends Controller
 
             $sub_total = 0;
             foreach ($carts as $key => $cart) {
+
                 $product = Product::where('id', $cart->product_id)->first();
                 $unit = ProductUnit::where('id', $cart->unit_id)->first();
+                if ($unit->stock < $cart->qty) {
+                    return msgdata($request, failed(), trans('lang.stock_error') . " " . $unit->titlr, (object)[]);
+                    DB::rollback();
+                }
                 $total_price = $unit->price - $unit->price * ($product->offer / 100);
                 $total = $cart->qty * $total_price;
 
@@ -189,30 +211,47 @@ class CartController extends Controller
                         'total' => $total,
                     ]
                 );
+                $unit->stock -= $cart->qty;
+                $unit->save();
                 $sub_total += $total;
             }
 
             $order->sub_total = $sub_total;
             $discount_amount = 0;
             if ($discount) {
+                $discount_usage = CouponUsage::where('coupon_id', $discount->id)
+                    ->where('customer_id', $user->id)
+                    ->count();
+                if ($discount->usage_count < $discount_usage) {
+                    if ($discount->active == 1 &&
+                        Carbon::now()->format("Y-m-d") > $discount->from_date &&
+                        Carbon::now()->format("Y-m-d") < $discount->to_date) {
+                        if ($discount->type == "percentage") {
 
-                if ($discount->active == 1 &&
-                    Carbon::now()->format("Y-m-d") > $discount->from_date &&
-                    Carbon::now()->format("Y-m-d") < $discount->to_date) {
-                    $discount_amount = $sub_total * ($discount->amount / 100);
-                    $order->discount = $sub_total * ($discount->amount / 100);
+                            $discount_amount = $sub_total * ($discount->amount / 100);
+                            $order->discount = $sub_total * ($discount->amount / 100);
+                        } else {
+                            $discount_amount = $discount->amount;
+                            $order->discount = $discount->amount;
+                        }
 
-                    $discount->save();
-                    CouponUsage::create([
-                        'coupon_id' => $discount->id,
-                        'customer_id' => $user->id
-                    ]);
+                        $discount->save();
+                        CouponUsage::create([
+                            'coupon_id' => $discount->id,
+                            'customer_id' => $user->id
+                        ]);
+                    }
                 }
             }
             $order->total = $sub_total + $order->shipping - $discount_amount;
             $order->save();
 
+            if ($unit->stock_alert == $unit->stock) {
+                //TODO::send Email to owner
+            }
             Cart::where('user_id', $user->id)->delete();
+
+            DB::commit();
             return msgdata($request, success(), trans('lang.success'), (object)[]);
         } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
