@@ -30,7 +30,7 @@ class HomeController extends Controller
         }else{
             $user_id =null;
         }
-        $sliders = Product::where('offer', '!=', 0)->orderBy('id', 'desc')->get();
+        $sliders = Product::life()->where('offer', '!=', 0)->orderBy('id', 'desc')->get();
         $data = ProductResource::customCollection($sliders ,$user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
@@ -51,7 +51,7 @@ class HomeController extends Controller
         }else{
             $user_id =null;
         }
-        $sliders = Product::where('sub_category_id', $id)->orderBy('id', 'desc')->get();
+        $sliders = Product::life()->where('sub_category_id', $id)->orderBy('id', 'desc')->get();
         $data = ProductResource::customCollection($sliders ,$user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
@@ -73,7 +73,7 @@ class HomeController extends Controller
             $user_id =null;
         }
 
-        $sliders = Product::whereId($id)->with('images')->firstOrFail();
+        $sliders = Product::life()->whereId($id)->with('images')->firstOrFail();
         $data = (new ProductResource($sliders))->user_id($user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
