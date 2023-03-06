@@ -34,7 +34,7 @@ class AuthController extends Controller
         $data['code'] = $six_digit_random_number;
         $data['password'] = $request->password;
         $data['verified'] = 0;
-        $data['active'] = 1;
+        $data['active'] = 0;
         $data['jwt'] = Str::random(120);
         $user = User::create($data);
         $data = new UserResource($user);
@@ -119,6 +119,8 @@ class AuthController extends Controller
             // dd($pass_reset);
             if ($target_user != null) {
                 $data['status'] = true;
+
+                $target_user->active = 1;
                 $target_user->verified = 1;
                 $target_user->code = null;
                 $target_user->save();
