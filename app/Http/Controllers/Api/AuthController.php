@@ -30,8 +30,10 @@ class AuthController extends Controller
             return msgdata($request, failed(), $validator->messages()->first(), (object)[]);
         }
         //Request is valid, create new user
+        $six_digit_random_number = six_digit_random_number();
+        $data['code'] = $six_digit_random_number;
         $data['password'] = $request->password;
-        $data['verified'] = 1;
+        $data['verified'] = 0;
         $data['active'] = 1;
         $data['jwt'] = Str::random(120);
         $user = User::create($data);
