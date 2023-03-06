@@ -57,7 +57,7 @@ class AuthController extends Controller
         }
         $credentials = $request->only(['email', 'password']);
         $user = User::where('email', $request->email)->first();
-        if ($user) {
+        if ($user && $user->verified && $user->active) {
             if (!Hash::check($request->password, $user->password)) {
                 return msgdata($request, failed(), trans('lang.not_authorized'), (object)[]);
             }
