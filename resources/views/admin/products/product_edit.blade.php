@@ -79,12 +79,12 @@
                                id="title_en"
                                placeholder="{{ __('messages.product_name_en') }}">
                     </div>
-                    <div class="form-group mb-4">
-                        <label for="price">{{ __('messages.product_price') }}</label>
-                        <input required type="number" class="form-control" value="{{$data->price}}" step="any" min="0"
-                               id="price" name="price"
-                               placeholder="{{ __('messages.product_price') }}">
-                    </div>
+{{--                    <div class="form-group mb-4">--}}
+{{--                        <label for="price">{{ __('messages.product_price') }}</label>--}}
+{{--                        <input required type="number" class="form-control" value="{{$data->price}}" step="any" min="0"--}}
+{{--                               id="price" name="price"--}}
+{{--                               placeholder="{{ __('messages.product_price') }}">--}}
+{{--                    </div>--}}
                     <div class="form-group mb-4">
                         <label for="offer">{{ __('messages.discount') }} (%)</label>
                         <input required type="number" class="form-control" min="0" max="100" id="offer"

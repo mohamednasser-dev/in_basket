@@ -84,15 +84,21 @@ class UnitesController extends AdminController
     // delete product
     public function delete($id)
     {
-        $unit = ProductUnit::whereId($id)->first();
-        $product_unites = ProductUnit::where('product_id', $unit->product_id)->get();
-        if (count($product_unites) == 1) {
-            session()->flash('danger', 'لا يمكن الحذف - يجب ان يكون هناك وحده على الاقل داخل المنتج');
+        try {
+            $unit = ProductUnit::whereId($id)->first();
+            $product_unites = ProductUnit::where('product_id', $unit->product_id)->get();
+            if (count($product_unites) == 1) {
+                session()->flash('danger', 'لا يمكن الحذف - يجب ان يكون هناك وحده على الاقل داخل المنتج');
+                return redirect()->back();
+            }
+            ProductUnit::whereId($id)->delete();
+            session()->flash('success', trans('messages.deleted_s'));
+            return redirect()->back();
+        } catch (\Exception $ex) {
+            session()->flash('danger', 'لا يمكن حذف الوحده لانهام مستخدمة في طلب من قبل');
             return redirect()->back();
         }
-        ProductUnit::whereId($id)->delete();
-        session()->flash('success', trans('messages.deleted_s'));
-        return redirect()->back();
+
     }
 
 }

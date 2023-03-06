@@ -193,7 +193,7 @@ class CartController extends Controller
             $sub_total = 0;
             foreach ($carts as $key => $cart) {
 
-                $product = Product::where('id', $cart->product_id)->first();
+                $product = Product::life()->where('id', $cart->product_id)->first();
                 $unit = ProductUnit::where('id', $cart->unit_id)->first();
                 if ($unit->stock < $cart->qty) {
                     return msgdata($request, failed(), trans('lang.stock_error') . " " . $unit->titlr, (object)[]);

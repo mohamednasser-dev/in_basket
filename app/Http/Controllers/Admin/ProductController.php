@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Cart;
 use App\Category_option;
 use App\Category_option_value;
 use App\Http\Controllers\Admin\categories\OptionsValuesController;
@@ -49,7 +50,7 @@ class ProductController extends AdminController
                 'sub_category_id' => 'required',
                 'title_ar' => 'required',
                 'title_en' => 'required',
-                'price' => 'required|numeric|min:0',
+//                'price' => 'required|numeric|min:0',
                 'offer' => 'nullable|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
@@ -102,7 +103,7 @@ class ProductController extends AdminController
                 'sub_category_id' => 'required',
                 'title_ar' => 'required',
                 'title_en' => 'required',
-                'price' => 'required',
+//                'price' => 'required',
                 'offer' => 'nullable|numeric|min:0|max:100',
                 'description_ar' => 'nullable',
                 'description_en' => 'nullable',
@@ -163,6 +164,8 @@ class ProductController extends AdminController
 //        unlink('uploads/products/' . $product->main_image);
         $product->deleted = 1;
         $product->save();
+
+        Cart::where('product_id', $product->id)->delete();
         session()->flash('success', trans('messages.deleted_s'));
         return redirect()->back();
     }

@@ -55,11 +55,11 @@
                         <input required type="text" name="title_en" class="form-control" id="title_en"
                                placeholder="{{ __('messages.product_name_en') }}" value="">
                     </div>
-                    <div class="form-group mb-4">
-                        <label for="price">{{ __('messages.product_price') }}</label>
-                        <input required type="number" class="form-control" step="any" min="0" id="price" name="price"
-                               placeholder="{{ __('messages.product_price') }}" value="">
-                    </div>
+{{--                    <div class="form-group mb-4">--}}
+{{--                        <label for="price">{{ __('messages.product_price') }}</label>--}}
+{{--                        <input required type="number" class="form-control" step="any" min="0" id="price" name="price"--}}
+{{--                               placeholder="{{ __('messages.product_price') }}" value="">--}}
+{{--                    </div>--}}
                     <div class="form-group mb-4">
                         <label for="offer">{{ __('messages.discount') }} (%)</label>
                         <input required type="number" class="form-control"  min="0" max="100" id="offer" name="offer"
