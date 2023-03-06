@@ -31,6 +31,12 @@ class AuthController extends Controller
         }
         //Request is valid, create new user
         $six_digit_random_number = six_digit_random_number();
+
+//                Mail::raw('رمز استعاده كلمه المرور الخاصة بك: ' . $six_digit_random_number, function ($message) use ($target_user) {
+//                    $message->subject('Reset Password');
+//                    $message->from('taheelpost@gmail.com', 'taheelpost');
+//                    $message->to($target_user->email);
+//                });
         $data['code'] = $six_digit_random_number;
         $data['password'] = $request->password;
         $data['verified'] = 0;
