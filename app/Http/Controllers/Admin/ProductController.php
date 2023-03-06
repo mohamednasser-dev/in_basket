@@ -76,6 +76,8 @@ class ProductController extends AdminController
                 $unit_data['unit_en'] = $unit['unit_en'];
                 $unit_data['quantity'] = $unit['quantity'];
                 $unit_data['price'] = $unit['price'];
+                $unit_data['stock'] = $unit['stock'];
+                $unit_data['stock_alert'] = $unit['stock_alert'];
                 ProductUnit::create($unit_data);
             }
         }

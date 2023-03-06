@@ -17,7 +17,7 @@ class AddColumnToOrderDetailsTable extends Migration
             $table->dropColumn('unit_ar');
             $table->dropColumn('unit_en');
             $table->bigInteger('unit_id')->unsigned();
-            $table->foreign('unit_id')->references('id')->on('product_units')->onDelete('cascade');
+            $table->foreign('unit_id')->references('id')->on('product_units')->onDelete('restrict');
 
         });
     }

@@ -138,22 +138,32 @@
                         $("#add_unit").click(function () {
                             var html = '';
                             html += '<div class="row" id="unit_row_' + i + '">' +
-                                '<div class="col-md-3">' +
+                                '<div class="col-md-2">' +
                                 '<label for="offer">{{ __('messages.unit_ar') }}</label>' +
                                 '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_ar]">' +
                                 '</div>' +
-                                '<div class="col-md-3">' +
+                                '<div class="col-md-2">' +
                                 '<label for="offer">{{ __('messages.unit_en') }}</label>' +
                                 '<input required type="text" class="form-control" min="0" maxlength="255" name="unites[' + i + '][unit_en]">' +
                                 '</div>' +
-                                '<div class="col-md-2">' +
+                                '<div class="col-md-1">' +
                                 '<label for="offer">{{ __('messages.quantity') }}</label>' +
                                 '<input required type="number" class="form-control" min="0" name="unites[' + i + '][quantity]"' +
                                 '  placeholder="{{ __('messages.quantity') }}" value="0">' +
                                 ' </div>' +
-                                ' <div class="col-md-3">' +
+                                ' <div class="col-md-2">' +
                                 ' <label for="offer">{{ __('messages.price') }}</label>' +
                                 ' <input required type="number" class="form-control" min="0" name="unites[' + i + '][price]"' +
+                                ' placeholder="{{ __('messages.price') }}" value="0">' +
+                                '</div>' +
+                                ' <div class="col-md-2">' +
+                                ' <label for="offer">{{ __('messages.stock') }}</label>' +
+                                ' <input required type="number" class="form-control" min="0" name="unites[' + i + '][stock]"' +
+                                ' placeholder="{{ __('messages.price') }}" value="0">' +
+                                '</div>' +
+                                ' <div class="col-md-2">' +
+                                ' <label for="offer">{{ __('messages.stock_alert') }}</label>' +
+                                ' <input required type="number" class="form-control" min="0" name="unites[' + i + '][stock_alert]"' +
                                 ' placeholder="{{ __('messages.price') }}" value="0">' +
                                 '</div>' +
                                 ' <div class="col-md-1">' +
