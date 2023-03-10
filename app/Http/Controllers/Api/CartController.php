@@ -248,12 +248,11 @@ class CartController extends Controller
 
             if ($unit->stock_alert == $unit->stock) {
                 //TODO::send Email to owner
-
-//                Mail::raw('رمز استعاده كلمه المرور الخاصة بك: ' . $six_digit_random_number, function ($message) use ($target_user) {
-//                    $message->subject('Reset Password');
-//                    $message->from('taheelpost@gmail.com', 'taheelpost');
-//                    $message->to($target_user->email);
-//                });
+                \Mail::raw('برجاء العلم ان الوحدة    ' . $unit->title .'قد وصل الى الحد الادنى ', function ($message) {
+                    $message->subject('Warning Mail');
+                    $message->from('info@felbasket.com', 'felbasket');
+                    $message->to("wael.abdelhamid1981@gmail.com");
+                });
             }
             Cart::where('user_id', $user->id)->delete();
 

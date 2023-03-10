@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Validator;
+use Mail;
 
 
 class AuthController extends Controller
@@ -32,11 +33,11 @@ class AuthController extends Controller
         //Request is valid, create new user
         $six_digit_random_number = six_digit_random_number();
 
-//                Mail::raw('رمز استعاده كلمه المرور الخاصة بك: ' . $six_digit_random_number, function ($message) use ($target_user) {
-//                    $message->subject('Reset Password');
-//                    $message->from('taheelpost@gmail.com', 'taheelpost');
-//                    $message->to($target_user->email);
-//                });
+                \Mail::raw('رمز التأكيد االخاص بك :  ' . $six_digit_random_number, function ($message) use ($data) {
+                    $message->subject('Verification Code');
+                    $message->from('info@felbasket.com', 'felbasket');
+                    $message->to($data->email);
+                });
         $data['code'] = $six_digit_random_number;
         $data['password'] = $request->password;
         $data['verified'] = 0;
@@ -96,11 +97,11 @@ class AuthController extends Controller
             if ($target_user) {
                 $target_user->code = $six_digit_random_number;
                 $target_user->save();
-//                Mail::raw('رمز استعاده كلمه المرور الخاصة بك: ' . $six_digit_random_number, function ($message) use ($target_user) {
-//                    $message->subject('Reset Password');
-//                    $message->from('taheelpost@gmail.com', 'taheelpost');
-//                    $message->to($target_user->email);
-//                });
+                \Mail::raw('رمز التأكيد االخاص بك :  ' . $six_digit_random_number, function ($message) use ($data) {
+                    $message->subject('Verification Code');
+                    $message->from('info@felbasket.com', 'felbasket');
+                    $message->to($data->email);
+                });
                 return sendResponse(200, trans('lang.email_send_code'), (object)[]);
             } else {
                 return msgdata($request, failed(), trans('lang.not_authorized'), (object)[]);
