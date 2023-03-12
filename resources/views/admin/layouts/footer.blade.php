@@ -5,7 +5,7 @@
 <div class="footer-wrapper">
     <div class="footer-section f-section-1">
         <p class="">{{ __('messages.copyright') }} © 2020
-            <a target="_blank" class="website-link" href="#"> hive Studio </a>
+            <a target="_blank" class="website-link" href="https://hivestudio.net/"> hive Studio </a>
             , {{ __('messages.all_rights_reserved') }}
         </p>
     </div>
