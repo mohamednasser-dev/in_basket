@@ -15,11 +15,11 @@ class ProductUnitsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'stock' => $this->stock,
+            'id' => (int) $this->id,
+            'title' =>(string) $this->title,
+            'price' => (double) $this->price,
+            'quantity' =>  (double)$this->quantity,
+            'stock' =>(int) $this->stock,
 
 
         ];

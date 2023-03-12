@@ -15,9 +15,9 @@ class MainCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'image' => $this->image,
-            'title' => $this->title,
+            'id' => (int) $this->id,
+            'image' => (string)  $this->image,
+            'title' =>  (string) $this->title,
 
 
         ];

@@ -39,14 +39,14 @@ class ProductResource extends JsonResource
             }
         }
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
+            'id' => (int) $this->id,
+            'title' => (string) $this->title,
+            'description' =>(string) $this->description,
             //   'price' => $this->price,
-            'discount' => $this->offer,
+            'discount' => (double) $this->offer,
             //  'total_price' => $this->price - $this->price * ($this->offer / 100),
-            'main_image' => $this->image,
-            'is_fav' => $is_fav,
+            'main_image' => (string) $this->image,
+            'is_fav' => (boolean) $is_fav,
             'units' => ProductUnitsResource::collection($this->productUnits),
             'images' => $this->whenLoaded('images', function () {
                 return $this->images;

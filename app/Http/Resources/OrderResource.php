@@ -15,15 +15,15 @@ class OrderResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'status' => $this->status,
-            'address' => $this->address,
-            'name' => $this->name,
-            'phone' => $this->phone,
-            'sub_total' => $this->sub_total,
-            'shipping' => $this->shipping,
-            'discount' => $this->discount,
-            'total' => $this->total,
+            'id' => (int) $this->id,
+            'status' => (string) $this->status,
+            'address' => (string) $this->address,
+            'name' => (string) $this->name,
+            'phone' => (string) $this->phone,
+            'sub_total' => (double) $this->sub_total,
+            'shipping' => (double) $this->shipping,
+            'discount' => (double) $this->discount,
+            'total' => (double) $this->total,
             'order_datails' =>OrderDetailsResource::collection($this->OrderDetails)
 
 

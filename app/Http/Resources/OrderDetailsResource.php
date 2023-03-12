@@ -15,11 +15,11 @@ class OrderDetailsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' =>   (int) $this->id,
             'product' => new ProductResource($this->Product),
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'total' => $this->total,
+            'quantity' => (int)  $this->quantity,
+            'price' => (double) $this->price,
+            'total' => (double) $this->total,
             'unit_selected' => new ProductUnitsResource($this->Unit),
 
 
