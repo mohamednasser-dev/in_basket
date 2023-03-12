@@ -28,6 +28,7 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     Route::post('social-login', 'AuthController@socialLogin');
     Route::get('user-data', 'AuthController@getUserData');
     Route::post('chang-user-data', 'AuthController@changData');
+    Route::get('delete-account', 'AuthController@deleteAccount');
 
     //Home
     Route::get('cities', 'HomeController@cities');
