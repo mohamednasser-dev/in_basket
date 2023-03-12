@@ -233,27 +233,25 @@ class AuthController extends Controller
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
         }
     }
-    public function AddToWishlist(Request $request)
+    public function changData(Request $request)
     {
         $user = check_api_token($request->header('jwt'));
         if ($user) {
 
             $rules = [
-                'product_id' => ['required', 'exists:products,id',
-                    Rule::unique('wishlists')->where(function ($query) use ($user, $request) {
-                        return $query->where('product_id', $request->product_id)
-                            ->where('user_id', $user->id);
-                    }),],
+                'name' => 'required|string',
+                'phone' => 'required|regex:/(01)[0125][0-9]{8}/|unique:users,phone,'.$user->id,
+                'email' => 'required|email|unique:users,email,'.$user->id,
 
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return msgdata($request, failed(), $validator->messages()->first(), (object)[]);
             }
-            Wishlist::create([
-                'product_id' => $request->product_id,
-                'user_id' => $user->id,
-            ]);
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->email = $request->email;
+            $user->save();
             return msgdata($request, success(), trans('lang.success'), (object)[]);
         } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
