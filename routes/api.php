@@ -27,7 +27,7 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     Route::post('change-password', 'AuthController@change_password');
     Route::post('social-login', 'AuthController@socialLogin');
     Route::get('user-data', 'AuthController@getUserData');
-    Route::get('chang-user-data', 'AuthController@changData');
+    Route::post('chang-user-data', 'AuthController@changData');
 
     //Home
     Route::get('cities', 'HomeController@cities');
