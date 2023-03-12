@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Validator;
 use Mail;
 
@@ -33,11 +34,11 @@ class AuthController extends Controller
         //Request is valid, create new user
         $six_digit_random_number = six_digit_random_number();
 
-                \Mail::raw('رمز التأكيد االخاص بك :  ' . $six_digit_random_number, function ($message) use ($data) {
-                    $message->subject('Verification Code');
-                    $message->from('info@felbasket.com', 'felbasket');
-                    $message->to($data->email);
-                });
+        \Mail::raw('رمز التأكيد االخاص بك :  ' . $six_digit_random_number, function ($message) use ($request) {
+            $message->subject('Verification Code');
+            $message->from('info@felbasket.com', 'felbasket');
+            $message->to($request->email);
+        });
         $data['code'] = $six_digit_random_number;
         $data['password'] = $request->password;
         $data['verified'] = 0;
@@ -222,5 +223,41 @@ class AuthController extends Controller
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
 
+    public function getUserData(Request $request)
+    {
+        $user = check_api_token($request->header('jwt'));
+        if ($user) {
+            $data = new UserResource($user);
+            return msgdata($request, success(), trans('lang.success'), $data);
+        } else {
+            return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
+        }
+    }
+    public function AddToWishlist(Request $request)
+    {
+        $user = check_api_token($request->header('jwt'));
+        if ($user) {
+
+            $rules = [
+                'product_id' => ['required', 'exists:products,id',
+                    Rule::unique('wishlists')->where(function ($query) use ($user, $request) {
+                        return $query->where('product_id', $request->product_id)
+                            ->where('user_id', $user->id);
+                    }),],
+
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return msgdata($request, failed(), $validator->messages()->first(), (object)[]);
+            }
+            Wishlist::create([
+                'product_id' => $request->product_id,
+                'user_id' => $user->id,
+            ]);
+            return msgdata($request, success(), trans('lang.success'), (object)[]);
+        } else {
+            return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
+        }
+    }
 
 }
