@@ -263,7 +263,7 @@ class AuthController extends Controller
         $user = check_api_token($request->header('jwt'));
         if ($user) {
             $user->delete();
-            return msgdata($request, success(), trans('lang.success'), $data);
+            return msgdata($request, success(), trans('lang.success'), (object)[]);
         } else {
             return msgdata($request, not_authoize(), trans('lang.not_authorize'), (object)[]);
         }
