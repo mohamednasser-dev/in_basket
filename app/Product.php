@@ -130,6 +130,11 @@ class Product extends Model
         return $this->hasMany('App\Category_option_value', 'product_id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Review', 'product_id');
+    }
+
     public function scopeLife($q)
     {
         return $q->where('deleted', 0);

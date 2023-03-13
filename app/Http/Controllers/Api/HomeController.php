@@ -77,10 +77,11 @@ class HomeController extends Controller
         }
 
 
-        $sliders = Product::life()->whereId($id)->with('images')->firstOrFail();
+        $sliders = Product::life()->whereId($id)->with('reviews')->with('images')->firstOrFail();
         $data = (new ProductResource($sliders))->user_id($user_id);
         return response()->json(msgdata($request, success(), trans('lang.success'), $data));
     }
+
 
 
     public function cities(Request $request)

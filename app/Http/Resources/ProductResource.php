@@ -39,19 +39,29 @@ class ProductResource extends JsonResource
             }
         }
         return [
-            'id' => (int) $this->id,
-            'title' => (string) $this->title,
-            'description' =>(string) $this->description,
+            'id' => (int)$this->id,
+            'title' => (string)$this->title,
+            'description' => (string)$this->description,
             //   'price' => $this->price,
-            'discount' => (double) $this->offer,
+            'discount' => (double)$this->offer,
             //  'total_price' => $this->price - $this->price * ($this->offer / 100),
-            'main_image' => (string) $this->image,
-            'is_fav' => (boolean) $is_fav,
+            'main_image' => (string)$this->image,
+            'is_fav' => (boolean)$is_fav,
             'units' => ProductUnitsResource::collection($this->productUnits),
             'images' => $this->whenLoaded('images', function () {
                 return $this->images;
-            })
+            }),
+            'Review_section' => [
+                'reviews' => ReviewResource::collection($this->reviews),
+                'total_reviews' => $this->reviews->count(),
+                'average' =>$this->reviews->count() > 0 ? $this->reviews->sum('rate') / $this->reviews->count() : 0,
+                'five_stars' => $this->reviews->where('rate', 5)->count(),
+                'four_stars' => $this->reviews->where('rate', 4)->count(),
+                'three_stars' => $this->reviews->where('rate', 3)->count(),
+                'two_stars' => $this->reviews->where('rate', 2)->count(),
+                'one_stars' => $this->reviews->where('rate', 1)->count(),
 
+            ],
 
         ];
     }

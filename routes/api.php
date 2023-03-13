@@ -38,6 +38,7 @@ Route::group(['namespace' => 'Api', 'middleware' => ['api']], function () {
     Route::get('category-products/{id}', 'HomeController@ProductsByCategory');
     Route::get('sub-category/{id}', 'HomeController@subCategory');
     Route::get('product-details/{id}', 'HomeController@productDetails');
+    Route::Post('make-review', 'AuthUserActions@MakeReview');
 
 
     //AuthActionUser
