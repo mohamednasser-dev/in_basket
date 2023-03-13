@@ -35,7 +35,7 @@
             </a>
         </div>
         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
-            <a href="/admin-panel/users">
+            <a href="admin-panel/users/show">
                 <div class="widget widget-card-four">
                     <div class="widget-content">
                         <div class="w-content">
