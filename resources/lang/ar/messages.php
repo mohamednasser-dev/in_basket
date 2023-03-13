@@ -2,6 +2,7 @@
 return [
 
     //new
+    'reviews' => 'التقييمات',
     'type_amount' => 'بالمقدار',
     'type_percentage' => 'بالنسبة',
     'product_unites' => 'وحدات المنتج',

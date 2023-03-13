@@ -95,7 +95,7 @@ class UnitesController extends AdminController
             session()->flash('success', trans('messages.deleted_s'));
             return redirect()->back();
         } catch (\Exception $ex) {
-            session()->flash('danger', 'لا يمكن حذف الوحده لانهام مستخدمة في طلب من قبل');
+            session()->flash('danger', 'لا يمكن حذف الوحده لانها مستخدمة في طلب من قبل');
             return redirect()->back();
         }
 

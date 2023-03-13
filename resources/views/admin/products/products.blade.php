@@ -22,6 +22,7 @@
                             <th class="text-center">{{ __('messages.product_name') }}</th>
                             <th class="text-center">{{ __('messages.publication_date') }}</th>
                             <th class="text-center">{{ __('messages.unites') }}</th>
+                            <th class="text-center">{{ __('messages.reviews') }}</th>
                             <th class="text-center">{{ __('messages.details') }}</th>
                             @if(Auth::user()->update_data)
                                 <th class="text-center">{{ __('messages.edit') }}</th>
@@ -50,6 +51,9 @@
                                 </td>
                                 <td class="text-center blue-color"><a
                                         href="{{ route('unites.index', $product->id) }}"><i class="far fa-eye"></i></a>
+                                </td>
+                                <td class="text-center blue-color"><a
+                                        href="{{ route('reviews.index', $product->id) }}"><i class="far fa-star"></i></a>
                                 </td>
                                 <td class="text-center blue-color"><a
                                         href="{{ route('products.details', $product->id) }}"><i class="far fa-eye"></i></a>

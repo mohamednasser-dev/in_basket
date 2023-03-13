@@ -230,6 +230,12 @@ Route::group(['middleware' => 'language', 'prefix' => "admin-panel", 'namespace'
         Route::post('/update/{id}', 'UnitesController@update')->name(".update");
         Route::get('/delete/{id}', 'UnitesController@delete')->name(".delete");
     });
+
+    Route::group(["prefix" => "reviews", 'as' => 'reviews'], function ($router) {
+        Route::get('/{product_id}', 'ReviewsController@index')->name(".index");
+        Route::get('/delete/{id}', 'ReviewsController@delete')->name(".delete");
+
+    });
     // Plans Routes
     Route::resource('plans', 'PlanController');
     Route::get('show_div/{type}', 'PlanController@show_div');
