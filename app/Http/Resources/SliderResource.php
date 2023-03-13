@@ -16,10 +16,10 @@ class SliderResource extends JsonResource
     {
         return [
             'id' => (int)$this->id,
-            'image' =>(string) $this->image,
+            'image' => (string)$this->image,
             'product' => [
-                'id' => (int)$this->product ? $this->product->id : null,
-                'name' =>(string) $this->product ? $this->product->title : "--"
+                'id' => $this->product ? $this->product->id : null,
+                'name' => (string)$this->product ? $this->product->title : "--"
             ]
 
         ];
